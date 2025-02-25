@@ -1,0 +1,138 @@
+﻿@model MarkaTLScript.Models.SystemSetting
+
+@{
+    ViewBag.Title = "Sistem Ayarları";
+    ViewBag.pTitle = "Sistem Ayarları";
+    ViewBag.pageTitle = "Sistem Ayarları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var alertMessage = TempData["SweetAlertMessage"] as string;
+    var alertType = TempData["SweetAlertType"] as string;
+}
+
+@section Scripts {
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var message = "@Html.Raw(alertMessage)";
+            var type = "@alertType";
+            if (message && message.length > 0) {
+                Swal.fire({
+                    title: (type === "success" ? "Başarılı" : "Uyarı"),
+                    text: message,
+                    icon: type
+                });
+            }
+        });
+    </script>
+}
+
+
+<!-- Sistem ayarları formu -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="/SistemAyarlari" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="SiteName" class="form-label">Site Adı</label>
+                                <input type="text" id="SiteName" name="SiteName" class="form-control" value="@Model.SiteName" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="CompanyName" class="form-label">Firma Adı</label>
+                                <input type="text" id="CompanyName" name="CompanyName" class="form-control" value="@Model.CompanyName" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="SupportPhone" class="form-label">Destek Telefonu</label>
+                                <input type="text" id="SupportPhone" name="SupportPhone" class="form-control" value="@Model.SupportPhone" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="SiteClosedMessage" class="form-label">Site Kapanma Mesajı</label>
+                                <textarea id="SiteClosedMessage" name="SiteClosedMessage" class="form-control">@Model.SiteClosedMessage</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="SiteName" class="form-label"></label>
+
+                            <!-- Sistem Durumu -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="SystemStatus">Sistem Durumu</label>
+                                    <div class="form-check form-switch form-switch-lg">
+                                  
+                                        <input class="form-check-input" type="checkbox" id="SystemStatus" name="SystemStatus" value="true"
+                                        @(Model.SystemStatus == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Telegram Bildirimleri -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="TelegramNotificationEnabled">Telegram Bildirimleri</label>
+                                    <div class="form-check form-switch form-switch-lg">
+                                     
+                                        <input class="form-check-input" type="checkbox" id="TelegramNotificationEnabled"
+                                               name="TelegramNotificationEnabled" value="true"
+                                        @(Model.TelegramNotificationEnabled == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kontör Durumu -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="KontorStatus">Kontör Durumu</label>
+                                    <div class="form-check form-switch form-switch-lg">
+                                      
+                                        <input class="form-check-input" type="checkbox" id="KontorStatus" name="KontorStatus" value="true"
+                                        @(Model.KontorStatus == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Oyun Durumu -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="GameStatus">Oyun Durumu</label>
+                                    <div class="form-check form-switch form-switch-lg">
+                                    
+                                        <input class="form-check-input" type="checkbox" id="GameStatus" name="GameStatus" value="true"
+                                        @(Model.GameStatus == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SMS Durumu -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="SmsStatus">SMS Durumu</label>
+                                    <div class="form-check form-switch form-switch-lg">
+                                     
+                                        <input class="form-check-input" type="checkbox" id="SmsStatus" name="SmsStatus" value="true"
+                                        @(Model.SmsStatus == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Card Footer'da Submit Butonu -->
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

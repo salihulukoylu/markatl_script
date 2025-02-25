@@ -3,52 +3,92 @@
   "WorkspaceRootPath": "D:\\repos\\markatl_script\\MarkaTLScript\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\models\\dbmarkatlscriptcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\models\\dbmarkatlscriptcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\models\\systemsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\models\\systemsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\settings\\sistemayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\settings\\sistemayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\markatlscript.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\markatlscript.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_title_meta.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_title_meta.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\scaffold.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\scaffold.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_customizer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_customizer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_head_css.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_head_css.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_vendor_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_vendor_scripts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_topbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_topbar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_footer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_footer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\settings\\bildirimayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\settings\\bildirimayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\settings\\kullaniciayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\settings\\kullaniciayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\models\\dbmarkatlscriptcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\models\\dbmarkatlscriptcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\scaffold.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\scaffold.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,50 +98,204 @@
       "DocumentGroups": [
         {
           "DockedWidth": 341,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DbMarkatlScriptContext.cs",
-              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
-              "RelativeDocumentMoniker": "MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
-              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
-              "RelativeToolTip": "MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAhwBEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T15:00:54.838Z",
+              "DocumentIndex": 10,
+              "Title": "_vendor_scripts.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_vendor_scripts.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_vendor_scripts.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_vendor_scripts.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_vendor_scripts.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T17:20:44.337Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
+              "Title": "_topbar.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_topbar.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_topbar.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_topbar.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_topbar.cshtml",
+              "ViewState": "AgIAACkAAAAAAAAAAAARwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T17:20:42.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_footer.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_footer.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_footer.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_footer.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_footer.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T17:20:32.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "SystemSetting.cs",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\SystemSetting.cs",
               "RelativeDocumentMoniker": "MarkaTLScript\\Models\\SystemSetting.cs",
               "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\SystemSetting.cs",
               "RelativeToolTip": "MarkaTLScript\\Models\\SystemSetting.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAARwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T15:00:25.411Z",
+              "WhenOpened": "2025-02-25T17:01:58.615Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MarkaTLScript",
-              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\MarkaTLScript.csproj",
-              "RelativeDocumentMoniker": "MarkaTLScript\\MarkaTLScript.csproj",
-              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\MarkaTLScript.csproj",
-              "RelativeToolTip": "MarkaTLScript\\MarkaTLScript.csproj",
+              "DocumentIndex": 16,
+              "Title": "KullaniciAyarlari.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\KullaniciAyarlari.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Settings\\KullaniciAyarlari.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\KullaniciAyarlari.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Settings\\KullaniciAyarlari.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:38:55.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BildirimAyarlari.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\BildirimAyarlari.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Settings\\BildirimAyarlari.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\BildirimAyarlari.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Settings\\BildirimAyarlari.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:38:51.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SettingsController.cs",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Controllers\\SettingsController.cs",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Controllers\\SettingsController.cs",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Controllers\\SettingsController.cs",
+              "RelativeToolTip": "MarkaTLScript\\Controllers\\SettingsController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAtwFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-25T15:37:24.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SistemAyarlari.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\SistemAyarlari.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Settings\\SistemAyarlari.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Settings\\SistemAyarlari.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Settings\\SistemAyarlari.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:35:14.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_title_meta.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_title_meta.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_title_meta.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_title_meta.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_title_meta.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:13:30.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_menu.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_menu.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_menu.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_menu.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_menu.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-24T14:57:43.363Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:13:20.209Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "_head_css.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_head_css.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_head_css.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_head_css.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_head_css.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:13:12.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_customizer.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_customizer.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_customizer.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_customizer.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_customizer.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T15:13:07.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_sidebar.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_sidebar.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_sidebar.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_sidebar.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_sidebar.cshtml",
+              "ViewState": "AgIAALMAAAAAAAAAAAASwL8AAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T14:52:53.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-25T14:52:07.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DbMarkatlScriptContext.cs",
+              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
+              "RelativeDocumentMoniker": "MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
+              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
+              "RelativeToolTip": "MarkaTLScript\\Models\\DbMarkatlScriptContext.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAgwEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T15:00:54.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
               "Title": "scaffold.txt",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\scaffold.txt",
               "RelativeDocumentMoniker": "MarkaTLScript\\scaffold.txt",
@@ -109,64 +303,37 @@
               "RelativeToolTip": "MarkaTLScript\\scaffold.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-02-24T14:47:22.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T14:47:22.574Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\appsettings.json",
-              "RelativeDocumentMoniker": "MarkaTLScript\\appsettings.json",
-              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\appsettings.json",
-              "RelativeToolTip": "MarkaTLScript\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-24T14:38:13.013Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DashBoardController.cs",
-              "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Controllers\\DashBoardController.cs",
-              "RelativeDocumentMoniker": "MarkaTLScript\\Controllers\\DashBoardController.cs",
-              "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Controllers\\DashBoardController.cs",
-              "RelativeToolTip": "MarkaTLScript\\Controllers\\DashBoardController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:25:09.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Index.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Index.cshtml",
               "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Index.cshtml",
               "RelativeToolTip": "MarkaTLScript\\Views\\Index.cshtml",
-              "ViewState": "AgIAACkAAAAAAAAAAAARwDcAAABJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-24T14:20:48.24Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Program.cs",
               "RelativeDocumentMoniker": "MarkaTLScript\\Program.cs",
               "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Program.cs",
               "RelativeToolTip": "MarkaTLScript\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-24T14:20:44.249Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 20,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "MarkaTLScript\\Models\\ErrorViewModel.cs",
@@ -174,12 +341,11 @@
               "RelativeToolTip": "MarkaTLScript\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T14:22:04.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T14:22:04.439Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "Error.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Shared\\Error.cshtml",
@@ -187,12 +353,11 @@
               "RelativeToolTip": "MarkaTLScript\\Views\\Shared\\Error.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T14:21:35.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T14:21:35.254Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\_ViewImports.cshtml",
@@ -205,7 +370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 7,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\_ViewStart.cshtml",
