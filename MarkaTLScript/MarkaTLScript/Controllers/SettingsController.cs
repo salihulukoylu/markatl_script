@@ -62,6 +62,7 @@ namespace MarkaTLScript.Controllers
                         existingSetting.KontorStatus = model.KontorStatus;
                         existingSetting.GameStatus = model.GameStatus;
                         existingSetting.SmsStatus = model.SmsStatus;
+                        existingSetting.SafeIps = model.SafeIps;
 
 
                         await _db.SaveChangesAsync();

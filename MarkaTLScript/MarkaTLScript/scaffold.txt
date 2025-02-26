@@ -1,3 +1,3 @@
 cd D:\repos\markatl_script\MarkaTLScript\MarkaTLScript
 
-dotnet ef dbcontext scaffold "Server=185.210.92.195;Port=3306;Database=db_markatl_script;User=user_markatl;Password=Ae*yh8834;" Pomelo.EntityFrameworkCore.MySql -o Models
+dotnet ef dbcontext scaffold "Server=185.210.92.195;Port=3306;Database=db_markatl_script;User=user_markatl;Password=Ae*yh8834;" Pomelo.EntityFrameworkCore.MySql -o Models -f

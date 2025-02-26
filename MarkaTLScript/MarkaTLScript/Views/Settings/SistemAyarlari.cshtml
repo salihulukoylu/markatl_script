@@ -26,7 +26,34 @@
                 });
             }
         });
+
+           document.addEventListener("DOMContentLoaded", function () {
+            var checkbox = document.getElementById("SystemStatus");
+            var container = document.getElementById("siteClosedMessageContainer");
+
+            // Checkboxtaki seçime göre alanı gizle/göster
+            function toggleSiteClosedMessage() {
+                // Eğer checkbox işaretliyse mesaj alanı gösterilsin, değilse gizlensin
+                if (checkbox.checked) {
+                    container.style.display = "none";
+                } else {
+                    container.style.display = "block";
+                }
+            }
+
+            // Sayfa yüklendikten sonra ilk durumu ayarla
+            toggleSiteClosedMessage();
+
+            // Checkbox değiştiğinde alanı tekrar kontrol et
+            checkbox.addEventListener("change", function () {
+                toggleSiteClosedMessage();
+            });
+        });
     </script>
+
+    
+     
+   
 }
 
 
@@ -52,9 +79,10 @@
                                 <label for="SupportPhone" class="form-label">Destek Telefonu</label>
                                 <input type="text" id="SupportPhone" name="SupportPhone" class="form-control" value="@Model.SupportPhone" />
                             </div>
+                        
                             <div class="mb-3">
-                                <label for="SiteClosedMessage" class="form-label">Site Kapanma Mesajı</label>
-                                <textarea id="SiteClosedMessage" name="SiteClosedMessage" class="form-control">@Model.SiteClosedMessage</textarea>
+                                <label for="SafeIps" class="form-label">Güvenli IP Adresleri</label>
+                                <textarea id="SafeIps" name="SafeIps" class="form-control">@Model.SafeIps</textarea>
                             </div>
                         </div>
 
@@ -62,16 +90,24 @@
                             <label for="SiteName" class="form-label"></label>
 
                             <!-- Sistem Durumu -->
+                            <!-- Sistem Durumu -->
                             <div class="mb-3 form-control">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="form-label" for="SystemStatus">Sistem Durumu</label>
                                     <div class="form-check form-switch form-switch-lg">
-                                  
                                         <input class="form-check-input" type="checkbox" id="SystemStatus" name="SystemStatus" value="true"
                                         @(Model.SystemStatus == true ? "checked" : "") />
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Site Kapalı Mesajı (Başlangıçta herkes için gösteriyoruz, JS ile gizleyeceğiz) -->
+                            <div class="mb-3" id="siteClosedMessageContainer">
+                                <label for="SiteClosedMessage" class="form-label">Site Kapanma Mesajı</label>
+                                <textarea id="SiteClosedMessage" name="SiteClosedMessage" class="form-control">@Model.SiteClosedMessage</textarea>
+                            </div>
+
+                       
 
                             <!-- Telegram Bildirimleri -->
                             <div class="mb-3 form-control">

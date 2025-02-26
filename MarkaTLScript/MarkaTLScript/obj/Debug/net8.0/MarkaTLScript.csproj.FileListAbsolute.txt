@@ -103,7 +103,6 @@ D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\refint\Mark
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\MarkaTLScript.pdb
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\MarkaTLScript.genruntimeconfig.cache
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\ref\MarkaTLScript.dll
-D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\obj\Debug\net8.0\MarkaTLScript.sourcelink.json
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\bin\Debug\net8.0\Microsoft.Build.dll

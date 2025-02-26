@@ -24,4 +24,6 @@ public partial class SystemSetting
     public bool? GameStatus { get; set; }
 
     public bool? SmsStatus { get; set; }
+
+    public string? SafeIps { get; set; }
 }

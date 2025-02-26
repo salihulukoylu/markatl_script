@@ -16,6 +16,10 @@ public partial class DbMarkatlScriptContext : DbContext
     {
     }
 
+    public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
+
+    public virtual DbSet<OperatorFirm> OperatorFirms { get; set; }
+
     public virtual DbSet<SystemSetting> SystemSettings { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,6 +32,33 @@ public partial class DbMarkatlScriptContext : DbContext
             .UseCollation("utf8_general_ci")
             .HasCharSet("utf8");
 
+        modelBuilder.Entity<EfmigrationsHistory>(entity =>
+        {
+            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
+
+            entity
+                .ToTable("__EFMigrationsHistory")
+                .HasCharSet("utf8mb4")
+                .UseCollation("utf8mb4_general_ci");
+
+            entity.Property(e => e.MigrationId).HasMaxLength(150);
+            entity.Property(e => e.ProductVersion).HasMaxLength(32);
+        });
+
+        modelBuilder.Entity<OperatorFirm>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("operator_firms");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.FirmName)
+                .HasMaxLength(255)
+                .HasColumnName("firm_name");
+        });
+
         modelBuilder.Entity<SystemSetting>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -35,7 +66,6 @@ public partial class DbMarkatlScriptContext : DbContext
             entity.ToTable("system_settings");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
                 .HasColumnType("int(11)")
                 .HasColumnName("id");
             entity.Property(e => e.CompanyName)
@@ -43,6 +73,9 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnName("company_name");
             entity.Property(e => e.GameStatus).HasColumnName("game_status");
             entity.Property(e => e.KontorStatus).HasColumnName("kontor_status");
+            entity.Property(e => e.SafeIps)
+                .HasMaxLength(2000)
+                .HasColumnName("safe_ips");
             entity.Property(e => e.SiteClosedMessage)
                 .HasColumnType("text")
                 .HasColumnName("site_closed_message");
