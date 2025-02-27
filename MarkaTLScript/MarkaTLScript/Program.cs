@@ -45,6 +45,12 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 // Özel rotalar
+
+app.MapControllerRoute(
+    name: "operator-ayarlari",
+    pattern: "OperatorAyarlari",
+    defaults: new { controller = "Operator", action = "OperatorSettings" });
+
 app.MapControllerRoute(
     name: "sistem-ayarlari",
     pattern: "SistemAyarlari",

@@ -18,7 +18,11 @@ public partial class DbMarkatlScriptContext : DbContext
 
     public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
 
+    public virtual DbSet<Operator> Operators { get; set; }
+
     public virtual DbSet<OperatorFirm> OperatorFirms { get; set; }
+
+    public virtual DbSet<OperatorType> OperatorTypes { get; set; }
 
     public virtual DbSet<SystemSetting> SystemSettings { get; set; }
 
@@ -45,6 +49,64 @@ public partial class DbMarkatlScriptContext : DbContext
             entity.Property(e => e.ProductVersion).HasMaxLength(32);
         });
 
+        modelBuilder.Entity<Operator>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("operators");
+
+            entity.HasIndex(e => e.FirmId, "firm_id");
+
+            entity.HasIndex(e => e.TypeId, "type_id");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.BackgroundColor)
+                .HasMaxLength(7)
+                .HasColumnName("background_color");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("current_timestamp()")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.DisplayName)
+                .HasMaxLength(255)
+                .HasColumnName("display_name");
+            entity.Property(e => e.DisplayOrder)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("int(11)")
+                .HasColumnName("display_order");
+            entity.Property(e => e.FirmId)
+                .HasColumnType("int(11)")
+                .HasColumnName("firm_id");
+            entity.Property(e => e.IsActive)
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("is_active");
+            entity.Property(e => e.MaxSubscriberNoLength)
+                .HasColumnType("int(11)")
+                .HasColumnName("max_subscriber_no_length");
+            entity.Property(e => e.MinSubscriberNoLength)
+                .HasColumnType("int(11)")
+                .HasColumnName("min_subscriber_no_length");
+            entity.Property(e => e.SystemName)
+                .HasMaxLength(255)
+                .HasColumnName("system_name");
+            entity.Property(e => e.TextColor)
+                .HasMaxLength(7)
+                .HasColumnName("text_color");
+            entity.Property(e => e.TypeId)
+                .HasColumnType("int(11)")
+                .HasColumnName("type_id");
+
+            entity.HasOne(d => d.Firm).WithMany(p => p.Operators)
+                .HasForeignKey(d => d.FirmId)
+                .HasConstraintName("operators_ibfk_1");
+
+            entity.HasOne(d => d.Type).WithMany(p => p.Operators)
+                .HasForeignKey(d => d.TypeId)
+                .HasConstraintName("operators_ibfk_2");
+        });
+
         modelBuilder.Entity<OperatorFirm>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -57,6 +119,20 @@ public partial class DbMarkatlScriptContext : DbContext
             entity.Property(e => e.FirmName)
                 .HasMaxLength(255)
                 .HasColumnName("firm_name");
+        });
+
+        modelBuilder.Entity<OperatorType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("operator_types");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.TypeName)
+                .HasMaxLength(100)
+                .HasColumnName("type_name");
         });
 
         modelBuilder.Entity<SystemSetting>(entity =>
