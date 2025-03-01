@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MarkaTLScript.Models;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
 
