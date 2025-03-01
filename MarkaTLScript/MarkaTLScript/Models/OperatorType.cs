@@ -7,7 +7,7 @@ public partial class OperatorType
 {
     public int Id { get; set; }
 
-    public string TypeName { get; set; } = null!;
+    public string TypeName { get; set; }
 
     public virtual ICollection<Operator> Operators { get; set; } = new List<Operator>();
 }

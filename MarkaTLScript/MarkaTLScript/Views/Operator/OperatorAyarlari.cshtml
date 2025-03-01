@@ -48,8 +48,8 @@
                             {
                                 @foreach (var item in Model)
                                 {
-                                    <tr style="background-color:@item.BackgroundColor; color:@item.TextColor;">
-                                        <td>@item.Firm.FirmName</td>
+                                    <tr>
+                                        <td><img src="/assets/images/@item.Firm.ImgPath" style="width:30px;" /> @item.Firm.FirmName</td>
                                         <td>@item.Type.TypeName</td>
                                         <td>@item.SystemName</td>
                                         <td>@item.DisplayName</td>
@@ -222,7 +222,7 @@
         });
     }
 
-        function editOperator(operatorId) {
+    function editOperator(operatorId) {
         // Önce AJAX ile mevcut verileri al
         $.ajax({
             url: '/Operator/AjaxGetOperator/' + operatorId,
@@ -237,26 +237,26 @@
                 Swal.fire({
                     title: 'Operatör Düzenle',
                     html:
-                        '<input id="systemName" class="form-control mb-3" value="' + data.operator.systemName + '" placeholder="Sistem Adı">' +
-                        '<input id="displayName" class="form-control mb-3" value="' + data.operator.displayName + '" placeholder="Görünecek Adı">' +
-                        '<input id="minNoLength" class="form-control mb-3" type="number" value="' + data.operator.minSubscriberNoLength + '" placeholder="Min Abone No Uzunluğu">' +
-                        '<input id="maxNoLength" class="form-control mb-3" type="number" value="' + data.operator.maxSubscriberNoLength + '" placeholder="Max Abone No Uzunluğu">' +
+                        '<input id="systemName" class="form-control mb-3" value="' + data.operatorData.systemName + '" placeholder="Sistem Adı">' +
+                        '<input id="displayName" class="form-control mb-3" value="' + data.operatorData.displayName + '" placeholder="Görünecek Adı">' +
+                        '<input id="minNoLength" class="form-control mb-3" type="number" value="' + data.operatorData.minSubscriberNoLength + '" placeholder="Min Abone No Uzunluğu">' +
+                        '<input id="maxNoLength" class="form-control mb-3" type="number" value="' + data.operatorData.maxSubscriberNoLength + '" placeholder="Max Abone No Uzunluğu">' +
 
                         '<div class="row mb-3">' +
                         '   <div class="col-6">' +
                         '       <label class="form-label">Arkaplan Rengi:</label>' +
-                        '       <input id="bgColor" class="form-control form-control-color" type="color" value="' + data.operator.backgroundColor + '">' +
+                        '       <input id="bgColor" class="form-control form-control-color" type="color" value="' + data.operatorData.backgroundColor + '">' +
                         '   </div>' +
                         '   <div class="col-6">' +
                         '       <label class="form-label">Yazı Rengi:</label>' +
-                        '       <input id="txtColor" class="form-control form-control-color" type="color" value="' + data.operator.textColor + '">' +
+                        '       <input id="txtColor" class="form-control form-control-color" type="color" value="' + data.operatorData.textColor + '">' +
                         '   </div>' +
                         '</div>' +
 
                         '<div class="d-flex justify-content-between align-items-center mb-3">' +
                         '   <label class="form-label" for="isActive">Aktif / Pasif</label>' +
                         '   <div class="form-check form-switch form-switch-lg">' +
-                        '       <input class="form-check-input" type="checkbox" id="isActive" ' + (data.operator.isActive ? 'checked' : '') + '>' +
+                        '       <input class="form-check-input" type="checkbox" id="isActive" ' + (data.operatorData.isActive ? 'checked' : '') + '>' +
                         '   </div>' +
                         '</div>',
                     focusConfirm: false,

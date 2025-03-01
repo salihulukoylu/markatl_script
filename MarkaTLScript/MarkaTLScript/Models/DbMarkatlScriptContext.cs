@@ -46,7 +46,9 @@ public partial class DbMarkatlScriptContext : DbContext
                 .UseCollation("utf8mb4_general_ci");
 
             entity.Property(e => e.MigrationId).HasMaxLength(150);
-            entity.Property(e => e.ProductVersion).HasMaxLength(32);
+            entity.Property(e => e.ProductVersion)
+                .IsRequired()
+                .HasMaxLength(32);
         });
 
         modelBuilder.Entity<Operator>(entity =>
@@ -70,6 +72,7 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
             entity.Property(e => e.DisplayName)
+                .IsRequired()
                 .HasMaxLength(255)
                 .HasColumnName("display_name");
             entity.Property(e => e.DisplayOrder)
@@ -80,6 +83,7 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("firm_id");
             entity.Property(e => e.IsActive)
+                .IsRequired()
                 .HasDefaultValueSql("'1'")
                 .HasColumnName("is_active");
             entity.Property(e => e.MaxSubscriberNoLength)
@@ -89,6 +93,7 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("min_subscriber_no_length");
             entity.Property(e => e.SystemName)
+                .IsRequired()
                 .HasMaxLength(255)
                 .HasColumnName("system_name");
             entity.Property(e => e.TextColor)
@@ -117,8 +122,12 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("id");
             entity.Property(e => e.FirmName)
+                .IsRequired()
                 .HasMaxLength(255)
                 .HasColumnName("firm_name");
+            entity.Property(e => e.ImgPath)
+                .HasMaxLength(50)
+                .HasColumnName("img_path");
         });
 
         modelBuilder.Entity<OperatorType>(entity =>
@@ -131,6 +140,7 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("id");
             entity.Property(e => e.TypeName)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("type_name");
         });

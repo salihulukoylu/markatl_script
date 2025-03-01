@@ -3,6 +3,10 @@ using MarkaTLScript.Models;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Pomelo.EntityFrameworkCore.MySql;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
