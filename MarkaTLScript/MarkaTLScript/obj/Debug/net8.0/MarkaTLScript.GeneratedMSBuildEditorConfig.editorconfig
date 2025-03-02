@@ -24,8 +24,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Operator/OperatorAyarlari.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3BlcmF0b3JcT3BlcmF0b3JBeWFybGFyaS5jc2h0bWw=
+[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Kontor/KontorApileri.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29udG9yXEtvbnRvckFwaWxlcmkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Kontor/OperatorAyarlari.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29udG9yXE9wZXJhdG9yQXlhcmxhcmkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Settings/BildirimAyarlari.cshtml]

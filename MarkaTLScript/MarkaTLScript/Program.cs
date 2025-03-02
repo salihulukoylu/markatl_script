@@ -27,6 +27,8 @@ builder.Services.AddDbContext<DbMarkatlScriptContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
+// LogService'i DI konteynerine ekliyoruz.
+builder.Services.AddScoped<ILogService, LogService>();
 
 var app = builder.Build();
 
@@ -50,6 +52,12 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 // Özel rotalar
+
+app.MapControllerRoute(
+    name: "Kontor-ayarlari",
+    pattern: "KontorApileri",
+    defaults: new { controller = "Api", action = "ApiListesi" });
+
 
 app.MapControllerRoute(
     name: "operator-ayarlari",

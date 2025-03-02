@@ -55,6 +55,7 @@ namespace MarkaTLScript.Controllers
                     else
                     {
                         // Kayıt varsa güncelle
+                       
                         existingSetting.SiteName = model.SiteName;
                         existingSetting.CompanyName = model.CompanyName;
                         existingSetting.SupportPhone = model.SupportPhone;
@@ -65,6 +66,7 @@ namespace MarkaTLScript.Controllers
                         existingSetting.GameStatus = model.GameStatus;
                         existingSetting.SmsStatus = model.SmsStatus;
                         existingSetting.SafeIps = model.SafeIps;
+                        existingSetting.FaturaStatus = model.FaturaStatus;
 
 
                         await _db.SaveChangesAsync();

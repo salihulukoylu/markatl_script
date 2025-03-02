@@ -67,8 +67,10 @@ wwwroot\assets\images\.png
 wwwroot\assets\images\404-error.png
 wwwroot\assets\images\about.jpg
 wwwroot\assets\images\auth-one-bg.jpg
+wwwroot\assets\images\avea.png
 wwwroot\assets\images\bg-auth.jpg
 wwwroot\assets\images\bg-d.png
+wwwroot\assets\images\bimcell.png
 wwwroot\assets\images\chat-bg-pattern.png
 wwwroot\assets\images\comingsoon.png
 wwwroot\assets\images\coming-soon-img.png
@@ -96,9 +98,12 @@ wwwroot\assets\images\logo-sm-1.png
 wwwroot\assets\images\modal-bg.png
 wwwroot\assets\images\new.png
 wwwroot\assets\images\new-document.png
+wwwroot\assets\images\oyun.png
+wwwroot\assets\images\pttcell.png
 wwwroot\assets\images\server-error.png
 wwwroot\assets\images\sorting.svg
 wwwroot\assets\images\task.png
+wwwroot\assets\images\turkcell.png
 wwwroot\assets\images\user-illustarator-1.png
 wwwroot\assets\images\user-illustarator-2.png
 wwwroot\assets\images\verification-img.png
@@ -343,7 +348,7 @@ wwwroot\assets\libs\@simonwep\pickr\themes\classic.min.css
 wwwroot\assets\libs\@simonwep\pickr\themes\monolith.min.css
 wwwroot\assets\libs\@simonwep\pickr\themes\nano.min.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js
-D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js
+wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js.gz
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.01.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.02.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.css

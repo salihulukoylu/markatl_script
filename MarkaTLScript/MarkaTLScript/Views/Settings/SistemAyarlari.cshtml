@@ -134,6 +134,18 @@
                                 </div>
                             </div>
 
+                            <!-- Fatura Durumu -->
+                            <div class="mb-3 form-control">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="form-label" for="FaturaStatus">Fatura Durumu</label>
+                                    <div class="form-check form-switch form-switch-lg">
+
+                                        <input class="form-check-input" type="checkbox" id="FaturaStatus" name="FaturaStatus" value="true"
+                                        @(Model.FaturaStatus == true ? "checked" : "") />
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Oyun Durumu -->
                             <div class="mb-3 form-control">
                                 <div class="d-flex justify-content-between align-items-center">

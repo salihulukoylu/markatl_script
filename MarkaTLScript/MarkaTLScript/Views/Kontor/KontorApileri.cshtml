@@ -1,0 +1,504 @@
+﻿@model IEnumerable<MarkaTLScript.Models.ApiDefinition>
+
+@{
+    ViewBag.Title = "Kontör API Listesi";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Kontör API Listesi</h4>
+                <button class="btn btn-success" onclick="openApiModal()">+ Yeni Kontör API Ekle</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>API Türü</th>
+                                <th>API Tanımı</th>
+                                <th>Site Adresi</th>
+                                <th>Kullanıcı Kodu</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Şifre</th>
+                                <th>Genel API Durumu</th>
+                                <th>Kontör Durumu</th>
+                                <th>Fatura Durumu</th>
+                                <th>Oyun Durumu</th>
+                                <th>Çalışma Saatleri</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ApiType.TypeName</td>
+                                        <td>@item.ApiDescription</td>
+                                        <td>@item.SiteAddress</td>
+                                        <td>@item.UserCode</td>
+                                        <td>@item.Username</td>
+                                        <td>@(string.IsNullOrEmpty(item.Password) ? "" : "******")</td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="apiStatus_@item.Id" @(item.ApiStatus ? "checked" : "")>
+                                                <label class="form-check-label" for="apiStatus_@item.Id">Aktif</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="kontorStatus_@item.Id" @(item.KontorStatus ? "checked" : "")>
+                                                <label class="form-check-label" for="kontorStatus_@item.Id">Aktif</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="faturaStatus_@item.Id" @(item.FaturaStatus ? "checked" : "")>
+                                                <label class="form-check-label" for="faturaStatus_@item.Id">Aktif</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="oyunStatus_@item.Id" @(item.OyunStatus ? "checked" : "")>
+                                                <label class="form-check-label" for="oyunStatus_@item.Id">Aktif</label>
+                                            </div>
+                                        </td>
+                                        <td>@item.WorkingHours</td>
+                                        <td>
+                                            <a onclick="editApi(@item.Id)" class="btn btn-warning btn-sm">Düzenle</a>
+                                            <a onclick="openBalanceModal(@item.Id)" class="btn btn-info btn-sm" title='Bakiye İşlemleri' data-bs-toggle='tooltip' data-bs-placement='top'>
+                                                <i class="fa fa-money"></i>
+                                            </a>
+                                            <a onclick="openAccountMovementsModal(@item.Id)" class="btn btn-secondary btn-sm" title='Hesap Hareketleri' data-bs-toggle='tooltip' data-bs-placement='top'>
+                                                <i class="fa fa-list"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="12" class="text-center">Kayıt bulunamadı</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yeni API ekleme ve düzenleme modalı (openApiModal, editApi) kodlarınız burada yer alıyor. -->
+
+<script>
+    // Yeni API ekleme modalı (zaten mevcut)
+    function openApiModal(){
+            Swal.fire({
+                title: 'Yeni Kontör API Ekle',
+                html:
+                    '<select id="apiTypeId" class="form-control mb-3">' +
+                        '<option value="">API Türü Seçiniz</option>' +
+                    '</select>' +
+                    '<input id="apiDescription" class="form-control mb-3" placeholder="API Tanımı">' +
+                    '<input id="siteAddress" class="form-control mb-3" placeholder="Site Adresi">' +
+                    '<input id="userCode" class="form-control mb-3" placeholder="Kullanıcı Kodu">' +
+                    '<input id="username" class="form-control mb-3" placeholder="Kullanıcı Adı">' +
+                    '<input id="password" type="password" class="form-control mb-3" placeholder="Şifre">' +
+                    // Durumlar için switch'ler
+                    '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '<label class="form-label" for="kontorStatus">Kontör Durumu</label>' +
+                        '<div class="form-check form-switch form-switch-lg">' +
+                            '<input class="form-check-input" type="checkbox" id="kontorStatus">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '<label class="form-label" for="faturaStatus">Fatura Durumu</label>' +
+                        '<div class="form-check form-switch form-switch-lg">' +
+                            '<input class="form-check-input" type="checkbox" id="faturaStatus">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '<label class="form-label" for="oyunStatus">Oyun Durumu</label>' +
+                        '<div class="form-check form-switch form-switch-lg">' +
+                            '<input class="form-check-input" type="checkbox" id="oyunStatus">' +
+                        '</div>' +
+                    '</div>' +
+                    // Yeni Genel API Durumu
+                    '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '<label class="form-label" for="apiStatus">Genel API Durumu</label>' +
+                        '<div class="form-check form-switch form-switch-lg">' +
+                            '<input class="form-check-input" type="checkbox" id="apiStatus">' +
+                        '</div>' +
+                    '</div>' +
+                    '<input id="workingHours" class="form-control mb-3" placeholder="Çalışma Saatleri">',
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Ekle',
+                preConfirm: () => {
+                    let apiTypeId = $('#apiTypeId').val();
+                    let apiDescription = $('#apiDescription').val().trim();
+                    let siteAddress = $('#siteAddress').val().trim();
+                    let userCode = $('#userCode').val().trim();
+                    let username = $('#username').val().trim();
+                    let password = $('#password').val().trim();
+                    let workingHours = $('#workingHours').val().trim();
+                    let kontorStatus = $('#kontorStatus').prop('checked');
+                    let faturaStatus = $('#faturaStatus').prop('checked');
+                    let oyunStatus = $('#oyunStatus').prop('checked');
+                    let apiStatus = $('#apiStatus').prop('checked');
+
+                    if(!apiTypeId){
+                        Swal.showValidationMessage('Lütfen bir API Türü seçiniz.');
+                        return false;
+                    }
+                    if(!apiDescription){
+                        Swal.showValidationMessage('Lütfen API tanımını giriniz.');
+                        return false;
+                    }
+                    if(!siteAddress){
+                        Swal.showValidationMessage('Lütfen Site adresini giriniz.');
+                        return false;
+                    }
+                    if(!userCode){
+                        Swal.showValidationMessage('Lütfen Kullanıcı kodunu giriniz.');
+                        return false;
+                    }
+                    if(!username){
+                        Swal.showValidationMessage('Lütfen Kullanıcı adını giriniz.');
+                        return false;
+                    }
+                    if(!password){
+                        Swal.showValidationMessage('Lütfen Şifre giriniz.');
+                        return false;
+                    }
+
+                    return {
+                        apiTypeId: apiTypeId,
+                        apiDescription: apiDescription,
+                        siteAddress: siteAddress,
+                        userCode: userCode,
+                        username: username,
+                        password: password,
+                        kontorStatus: kontorStatus,
+                        faturaStatus: faturaStatus,
+                        oyunStatus: oyunStatus,
+                        apiStatus: apiStatus,
+                        workingHours: workingHours
+                    };
+                },
+                didOpen: () => {
+                    // API Türleri listesini çekme
+                    $.ajax({
+                        url: '/Api/GetApiTypes',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response){
+                            var dropdown = $('#apiTypeId');
+                            response.data.forEach(function(item){
+                                dropdown.append(`<option value="${item.id}">${item.type_name}</option>`);
+                            });
+                        },
+                        error: function(){
+                            Swal.fire('Hata!', 'API türleri yüklenemedi.', 'error');
+                        }
+                    });
+                }
+            }).then((result)=>{
+                if(result.isConfirmed && result.value){
+                    $.ajax({
+                        url: '/Api/AjaxCreateApi',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(result.value),
+                        success: function(response){
+                            Swal.fire('Başarılı!', response.message, 'success').then(()=>{
+                                location.reload();
+                            });
+                        },
+                        error: function(){
+                            Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        // API düzenleme modalı
+        function editApi(apiId){
+            $.ajax({
+                url: '/Api/AjaxGetApi/' + apiId,
+                type: 'GET',
+                success: function(data){
+                    if(!data.success){
+                        Swal.fire('Hata!', data.message, 'error');
+                        return;
+                    }
+                    Swal.fire({
+                        title: 'API Düzenle',
+                        html:
+                            '<select id="apiTypeId" class="form-control mb-3">' +
+                                '<option value="">API Türü Seçiniz</option>' +
+                            '</select>' +
+                            '<input id="apiDescription" class="form-control mb-3" placeholder="API Tanımı" value="' + data.apiData.apiDescription + '">'+
+                            '<input id="siteAddress" class="form-control mb-3" placeholder="Site Adresi" value="' + data.apiData.siteAddress + '">' +
+                            '<input id="userCode" class="form-control mb-3" placeholder="Kullanıcı Kodu" value="' + data.apiData.userCode + '">' +
+                            '<input id="username" class="form-control mb-3" placeholder="Kullanıcı Adı" value="' + data.apiData.username + '">' +
+                            '<input id="password" type="password" class="form-control mb-3" placeholder="Şifre" value="' + data.apiData.password + '">' +
+                            '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                                '<label class="form-label" for="kontorStatus">Kontör Durumu</label>' +
+                                '<div class="form-check form-switch form-switch-lg">' +
+                                    '<input class="form-check-input" type="checkbox" id="kontorStatus" ' + (data.apiData.kontorStatus ? 'checked' : '') + '>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                                '<label class="form-label" for="faturaStatus">Fatura Durumu</label>' +
+                                '<div class="form-check form-switch form-switch-lg">' +
+                                    '<input class="form-check-input" type="checkbox" id="faturaStatus" ' + (data.apiData.faturaStatus ? 'checked' : '') + '>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                                '<label class="form-label" for="oyunStatus">Oyun Durumu</label>' +
+                                '<div class="form-check form-switch form-switch-lg">' +
+                                    '<input class="form-check-input" type="checkbox" id="oyunStatus" ' + (data.apiData.oyunStatus ? 'checked' : '') + '>' +
+                                '</div>' +
+                            '</div>' +
+                            // Genel API Durumu
+                            '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                                '<label class="form-label" for="apiStatus">Genel API Durumu</label>' +
+                                '<div class="form-check form-switch form-switch-lg">' +
+                                    '<input class="form-check-input" type="checkbox" id="apiStatus" ' + (data.apiData.apiStatus ? 'checked' : '') + '>' +
+                                '</div>' +
+                            '</div>' +
+                            '<input id="workingHours" class="form-control mb-3" placeholder="Çalışma Saatleri" value="' + data.apiData.workingHours + '">',
+                        focusConfirm: false,
+                        showCancelButton: true,
+                        confirmButtonText: 'Kaydet',
+                        preConfirm: () => {
+                            let apiTypeId = $('#apiTypeId').val();
+                            let apiDescription = $('#apiDescription').val().trim();
+                            let siteAddress = $('#siteAddress').val().trim();
+                            let userCode = $('#userCode').val().trim();
+                            let username = $('#username').val().trim();
+                            let password = $('#password').val().trim();
+                            let workingHours = $('#workingHours').val().trim();
+                            let kontorStatus = $('#kontorStatus').prop('checked');
+                            let faturaStatus = $('#faturaStatus').prop('checked');
+                            let oyunStatus = $('#oyunStatus').prop('checked');
+                            let apiStatus = $('#apiStatus').prop('checked');
+
+                            if(!apiTypeId){
+                                Swal.showValidationMessage('Lütfen bir API Türü seçiniz.');
+                                return false;
+                            }
+                            if(!apiDescription){
+                                Swal.showValidationMessage('Lütfen API tanımını giriniz.');
+                                return false;
+                            }
+                            if(!siteAddress){
+                                Swal.showValidationMessage('Lütfen Site adresini giriniz.');
+                                return false;
+                            }
+                            if(!userCode){
+                                Swal.showValidationMessage('Lütfen Kullanıcı kodunu giriniz.');
+                                return false;
+                            }
+                            if(!username){
+                                Swal.showValidationMessage('Lütfen Kullanıcı adını giriniz.');
+                                return false;
+                            }
+                            if(!password){
+                                Swal.showValidationMessage('Lütfen Şifre giriniz.');
+                                return false;
+                            }
+
+                            return {
+                                id: apiId,
+                                apiTypeId: apiTypeId,
+                                apiDescription: apiDescription,
+                                siteAddress: siteAddress,
+                                userCode: userCode,
+                                username: username,
+                                password: password,
+                                kontorStatus: kontorStatus,
+                                faturaStatus: faturaStatus,
+                                oyunStatus: oyunStatus,
+                                apiStatus: apiStatus,
+                                workingHours: workingHours
+                            };
+                        },
+                        didOpen: () => {
+                            // API Türleri listesini çekme
+                            $.ajax({
+                                url: '/Api/GetApiTypes',
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(response){
+                                    var dropdown = $('#apiTypeId');
+                                    response.data.forEach(function(item){
+                                        var selected = item.id === data.apiData.apiTypeId ? 'selected' : '';
+                                        dropdown.append(`<option value="${item.id}" ${selected}>${item.type_name}</option>`);
+                                    });
+                                },
+                                error: function(){
+                                    Swal.fire('Hata!', 'API türleri yüklenemedi.', 'error');
+                                }
+                            });
+                        }
+                    }).then((result)=>{
+                        if(result.isConfirmed && result.value){
+                            $.ajax({
+                                url: '/Api/UpdateApi',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(result.value),
+                                success: function(response){
+                                    Swal.fire('Başarılı!', response.message, 'success').then(()=>{
+                                        location.reload();
+                                    });
+                                },
+                                error: function(){
+                                    Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                                }
+                            });
+                        }
+                    });
+                },
+                error: function(){
+                    Swal.fire('Hata!', 'API bilgileri alınamadı.', 'error');
+                }
+            });
+        }
+    // Yeni: Bakiye işlemleri için modal açma
+    function openBalanceModal(apiId) {
+        Swal.fire({
+            title: 'API Bakiye İşlemi',
+            html:
+                '<select id="transactionType" class="form-control mb-3">' +
+                    '<option value="">İşlem Türü Seçiniz</option>' +
+                    '<option value="Borç Bakiye">Borç Bakiye</option>' +
+                    '<option value="Borç Ödeme">Borç Ödeme</option>' +
+                    '<option value="Nakit Bakiye">Nakit Bakiye</option>' +
+                '</select>' +
+                '<input id="bankSelection" class="form-control mb-3" placeholder="Banka Seçiniz (veya Banka Adı)">' +
+                '<input id="amount" class="form-control mb-3" type="number" placeholder="Tutar">' +
+                '<textarea id="transactionDescription" class="form-control mb-3" placeholder="Açıklama"></textarea>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'İşlemi Kaydet',
+            preConfirm: () => {
+                let transactionType = $('#transactionType').val();
+                let bankSelection = $('#bankSelection').val().trim();
+                let amount = $('#amount').val().trim();
+                let transactionDescription = $('#transactionDescription').val().trim();
+
+                if (!transactionType) {
+                    Swal.showValidationMessage('Lütfen işlem türünü seçiniz.');
+                    return false;
+                }
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    Swal.showValidationMessage('Lütfen geçerli bir tutar giriniz.');
+                    return false;
+                }
+                return {
+                    apiDefinitionId: apiId,
+                    transactionType: transactionType,
+                    bankSelection: bankSelection,
+                    amount: parseFloat(amount),
+                    description: transactionDescription
+                };
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Api/AddBalanceTransaction',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function(response) {
+                        Swal.fire('Başarılı!', response.message, 'success');
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Bakiye işlemi kaydedilemedi.', 'error');
+                    }
+                });
+            }
+        });
+    }
+
+    // Yeni: API hesap hareketlerini görüntülemek için modal açma
+    function openAccountMovementsModal(apiId) {
+        $.ajax({
+            url: '/Api/ListAccountMovements?apiDefinitionId=' + apiId,
+            type: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    let html = '<table class="table table-bordered"><thead><tr>' +
+                               '<th>Tarih</th><th>Tip</th><th>Tutar</th><th>Önceki Bakiye</th><th>Yeni Bakiye</th><th>Açıklama</th>' +
+                               '</tr></thead><tbody>';
+                    response.data.forEach(function(item) {
+                        html += `<tr>
+                                    <td>${item.transactionDate}</td>
+                                    <td>${item.movementType}</td>
+                                    <td>${item.amount}</td>
+                                    <td>${item.previousBalance}</td>
+                                    <td>${item.newBalance}</td>
+                                    <td>${item.description}</td>
+                                </tr>`;
+                    });
+                    html += '</tbody></table>';
+                    Swal.fire({
+                        title: 'API Hesap Hareketleri',
+                        html: html,
+                        width: '80%'
+                    });
+                } else {
+                    Swal.fire('Hata!', response.message, 'error');
+                }
+            },
+            error: function() {
+                Swal.fire('Hata!', 'Hareketler getirilemedi.', 'error');
+            }
+        });
+    }
+
+    // Mevcut: Dinamik switch checkbox değişikliklerini yakalama
+    $(document).on('change', '.code-switcher', function() {
+        var checkbox = $(this);
+        var elementId = checkbox.attr('id');
+        var parts = elementId.split('_');
+        var field = parts[0]; // örn: kontorStatus, faturaStatus, oyunStatus, apiStatus
+        var apiId = parts[1];
+        var newValue = checkbox.is(':checked');
+
+        $.ajax({
+            url: '/Api/UpdateApiStatus',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: apiId, field: field, value: newValue }),
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Durum güncellenemedi.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                checkbox.prop('checked', !newValue);
+            }
+        });
+    });
+</script>

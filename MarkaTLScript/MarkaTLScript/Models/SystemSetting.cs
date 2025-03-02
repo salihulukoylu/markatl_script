@@ -26,4 +26,6 @@ public partial class SystemSetting
     public bool? SmsStatus { get; set; }
 
     public string SafeIps { get; set; }
+
+    public bool? FaturaStatus { get; set; }
 }

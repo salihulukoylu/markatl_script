@@ -16,6 +16,14 @@ public partial class DbMarkatlScriptContext : DbContext
     {
     }
 
+    public virtual DbSet<ApiAccountMovement> ApiAccountMovements { get; set; }
+
+    public virtual DbSet<ApiBalanceTransaction> ApiBalanceTransactions { get; set; }
+
+    public virtual DbSet<ApiDefinition> ApiDefinitions { get; set; }
+
+    public virtual DbSet<ApiTypeList> ApiTypeLists { get; set; }
+
     public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
 
     public virtual DbSet<Operator> Operators { get; set; }
@@ -23,6 +31,8 @@ public partial class DbMarkatlScriptContext : DbContext
     public virtual DbSet<OperatorFirm> OperatorFirms { get; set; }
 
     public virtual DbSet<OperatorType> OperatorTypes { get; set; }
+
+    public virtual DbSet<SystemLog> SystemLogs { get; set; }
 
     public virtual DbSet<SystemSetting> SystemSettings { get; set; }
 
@@ -35,6 +45,148 @@ public partial class DbMarkatlScriptContext : DbContext
         modelBuilder
             .UseCollation("utf8_general_ci")
             .HasCharSet("utf8");
+
+        modelBuilder.Entity<ApiAccountMovement>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("api_account_movements");
+
+            entity.HasIndex(e => e.ApiDefinitionId, "fk_api_movement_api");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Amount)
+                .HasPrecision(10, 2)
+                .HasColumnName("amount");
+            entity.Property(e => e.ApiDefinitionId)
+                .HasColumnType("int(11)")
+                .HasColumnName("api_definition_id");
+            entity.Property(e => e.Description)
+                .HasColumnType("text")
+                .HasColumnName("description");
+            entity.Property(e => e.MovementType)
+                .IsRequired()
+                .HasColumnType("enum('Gelir','Gider')")
+                .HasColumnName("movement_type");
+            entity.Property(e => e.NewBalance)
+                .HasPrecision(10, 2)
+                .HasColumnName("new_balance");
+            entity.Property(e => e.PreviousBalance)
+                .HasPrecision(10, 2)
+                .HasColumnName("previous_balance");
+            entity.Property(e => e.TransactionDate)
+                .HasDefaultValueSql("current_timestamp()")
+                .HasColumnType("datetime")
+                .HasColumnName("transaction_date");
+
+            entity.HasOne(d => d.ApiDefinition).WithMany(p => p.ApiAccountMovements)
+                .HasForeignKey(d => d.ApiDefinitionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_api_movement_api");
+        });
+
+        modelBuilder.Entity<ApiBalanceTransaction>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("api_balance_transactions");
+
+            entity.HasIndex(e => e.ApiDefinitionId, "fk_api_balance_api");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Amount)
+                .HasPrecision(10, 2)
+                .HasColumnName("amount");
+            entity.Property(e => e.ApiDefinitionId)
+                .HasColumnType("int(11)")
+                .HasColumnName("api_definition_id");
+            entity.Property(e => e.BankId)
+                .HasColumnType("int(11)")
+                .HasColumnName("bank_id");
+            entity.Property(e => e.Description)
+                .HasColumnType("text")
+                .HasColumnName("description");
+            entity.Property(e => e.TransactionDate)
+                .HasDefaultValueSql("current_timestamp()")
+                .HasColumnType("datetime")
+                .HasColumnName("transaction_date");
+            entity.Property(e => e.TransactionType)
+                .IsRequired()
+                .HasColumnType("enum('Borç Bakiye','Borç Ödeme','Nakit Bakiye')")
+                .HasColumnName("transaction_type");
+
+            entity.HasOne(d => d.ApiDefinition).WithMany(p => p.ApiBalanceTransactions)
+                .HasForeignKey(d => d.ApiDefinitionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_api_balance_api");
+        });
+
+        modelBuilder.Entity<ApiDefinition>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("api_definitions");
+
+            entity.HasIndex(e => e.ApiTypeId, "fk_api_type");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.ApiDescription)
+                .IsRequired()
+                .HasColumnType("text")
+                .HasColumnName("api_description");
+            entity.Property(e => e.ApiStatus).HasColumnName("api_status");
+            entity.Property(e => e.ApiTypeId)
+                .HasColumnType("int(11)")
+                .HasColumnName("api_type_id");
+            entity.Property(e => e.FaturaStatus).HasColumnName("fatura_status");
+            entity.Property(e => e.KontorStatus).HasColumnName("kontor_status");
+            entity.Property(e => e.OyunStatus).HasColumnName("oyun_status");
+            entity.Property(e => e.Password)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("password");
+            entity.Property(e => e.SiteAddress)
+                .IsRequired()
+                .HasMaxLength(255)
+                .HasColumnName("site_address");
+            entity.Property(e => e.UserCode)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnName("user_code");
+            entity.Property(e => e.Username)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("username");
+            entity.Property(e => e.WorkingHours)
+                .HasMaxLength(50)
+                .HasColumnName("working_hours");
+
+            entity.HasOne(d => d.ApiType).WithMany(p => p.ApiDefinitions)
+                .HasForeignKey(d => d.ApiTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_api_type");
+        });
+
+        modelBuilder.Entity<ApiTypeList>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("api_type_list");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.TypeName)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("type_name");
+        });
 
         modelBuilder.Entity<EfmigrationsHistory>(entity =>
         {
@@ -145,6 +297,34 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnName("type_name");
         });
 
+        modelBuilder.Entity<SystemLog>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("system_logs");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.ActionName)
+                .HasMaxLength(100)
+                .HasColumnName("action_name");
+            entity.Property(e => e.ControllerName)
+                .HasMaxLength(100)
+                .HasColumnName("controller_name");
+            entity.Property(e => e.ExceptionMessage)
+                .IsRequired()
+                .HasColumnType("text")
+                .HasColumnName("exception_message");
+            entity.Property(e => e.ExceptionStackTrace)
+                .HasColumnType("text")
+                .HasColumnName("exception_stack_trace");
+            entity.Property(e => e.Timestamp)
+                .HasDefaultValueSql("current_timestamp()")
+                .HasColumnType("datetime")
+                .HasColumnName("timestamp");
+        });
+
         modelBuilder.Entity<SystemSetting>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -157,6 +337,7 @@ public partial class DbMarkatlScriptContext : DbContext
             entity.Property(e => e.CompanyName)
                 .HasMaxLength(255)
                 .HasColumnName("company_name");
+            entity.Property(e => e.FaturaStatus).HasColumnName("fatura_status");
             entity.Property(e => e.GameStatus).HasColumnName("game_status");
             entity.Property(e => e.KontorStatus).HasColumnName("kontor_status");
             entity.Property(e => e.SafeIps)

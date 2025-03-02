@@ -277,12 +277,20 @@
       "PackagePath": "staticwebassets\\assets\\images\\auth-one-bg.jpg"
     },
     {
+      "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\avea.png",
+      "PackagePath": "staticwebassets\\assets\\images\\avea.png"
+    },
+    {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\bg-auth.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\bg-auth.jpg"
     },
     {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\bg-d.png",
       "PackagePath": "staticwebassets\\assets\\images\\bg-d.png"
+    },
+    {
+      "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\bimcell.png",
+      "PackagePath": "staticwebassets\\assets\\images\\bimcell.png"
     },
     {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\chat-bg-pattern.png",
@@ -393,6 +401,14 @@
       "PackagePath": "staticwebassets\\assets\\images\\new.png"
     },
     {
+      "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\oyun.png",
+      "PackagePath": "staticwebassets\\assets\\images\\oyun.png"
+    },
+    {
+      "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\pttcell.png",
+      "PackagePath": "staticwebassets\\assets\\images\\pttcell.png"
+    },
+    {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\server-error.png",
       "PackagePath": "staticwebassets\\assets\\images\\server-error.png"
     },
@@ -403,6 +419,10 @@
     {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\task.png",
       "PackagePath": "staticwebassets\\assets\\images\\task.png"
+    },
+    {
+      "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\turkcell.png",
+      "PackagePath": "staticwebassets\\assets\\images\\turkcell.png"
     },
     {
       "Id": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\wwwroot\\assets\\images\\user-illustarator-1.png",

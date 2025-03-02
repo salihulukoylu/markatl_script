@@ -1,0 +1,443 @@
+﻿@model IEnumerable<MarkaTLScript.Models.Operator>
+
+@{
+    ViewBag.Title = "Operatör Ayarları";
+    ViewBag.pTitle = "Operatör Ayarları";
+    ViewBag.pageTitle = "Operatör Ayarları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var alertMessage = TempData["SweetAlertMessage"] as string;
+    var alertType = TempData["SweetAlertType"] as string;
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+    <script>
+        Swal.fire({
+            icon: '@alertType',
+            title: '@alertMessage'
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Operatörler</h4>
+                <button class="btn btn-success" onclick="openOperatorModal()">+ Yeni Operatör Ekle</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Firma</th>
+                                <th>Operatör Tipi</th>
+                                <th>Sistem Adı</th>
+                                <th>Site Görünen Adı</th>
+                                <th>Renk Önizleme</th>
+
+                                <th>Abone No Min/Max</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><img src="/assets/images/@item.Firm.ImgPath" style="width:30px;" /> @item.Firm.FirmName</td>
+                                        <td>@item.Type.TypeName</td>
+                                        <td>@item.SystemName</td>
+                                        <td>@item.DisplayName</td>
+                                        <td>
+                                            <div style="background-color:@item.BackgroundColor; padding:5px; text-align:center;">
+                                                <span style="color:@item.TextColor;">Sitede Görünecek Renk</span>
+                                            </div>
+                                        </td>
+                                        <td>@item.MinSubscriberNoLength / @item.MaxSubscriberNoLength</td>
+                                        <td>
+
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="isActive_@item.Id" @(item.IsActive ? "checked" : "")>
+                                                <label class="form-check-label" for="isActive_@item.Id">Aktif / Pasif</label>
+                                                </div>
+                                            
+                                        </td>
+
+                                        <td>
+                                            <button onclick="editOperator(@item.Id)" class="btn btn-warning btn-sm">Düzenle</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">Kayıt bulunamadı</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  
+
+    function openOperatorModal() {
+        Swal.fire({
+            title: 'Yeni Operatör Ekle',
+            html:
+                '<select id="firmId" class="form-control mb-3">' +
+                '<option value="">Firma Seçiniz</option>' +
+                '</select>' +
+                '<select id="typeId" class="form-control mb-3">' +
+                '<option value="">Tip Seçiniz</option>' +
+                '</select>' +
+                '<input id="systemName" class="form-control mb-3" placeholder="Sistem Adı">' +
+                '<input id="displayName" class="form-control mb-3" placeholder="Görünecek Adı">' +
+                '<input id="minNoLength" class="form-control mb-3" type="number" placeholder="Min Abone No Uzunluğu">' +
+                '<input id="maxNoLength" class="form-control mb-3" type="number" placeholder="Max Abone No Uzunluğu">' +
+
+                // ✅ Renk Seçimi Yan Yana (col-6)
+                '<div class="row mb-3">' +
+                '   <div class="col-6">' +
+                '       <label class="form-label">Arkaplan Rengi:</label>' +
+                '       <input id="bgColor" class="form-control form-control-color" type="color">' +
+                '   </div>' +
+                '   <div class="col-6">' +
+                '       <label class="form-label">Yazı Rengi:</label>' +
+                '       <input id="txtColor" class="form-control form-control-color" type="color">' +
+                '   </div>' +
+                '</div>' +
+
+                // ✅ Checkbox - Kontör Durumu
+                '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                '   <label class="form-label" for="isActive">Aktif / Pasif</label>' +
+                '   <div class="form-check form-switch form-switch-lg">' +
+                '       <input class="form-check-input" type="checkbox" id="isActive">' +
+                '   </div>' +
+                '</div>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            preConfirm: () => {
+                let firmId = $('#firmId').val();
+                let typeId = $('#typeId').val();
+                let systemName = $('#systemName').val().trim();
+                let displayName = $('#displayName').val().trim();
+                let minNoLength = $('#minNoLength').val().trim();
+                let maxNoLength = $('#maxNoLength').val().trim();
+                let bgColor = $('#bgColor').val().trim();
+                let txtColor = $('#txtColor').val().trim();
+
+                // ✅ Boş Alan Kontrolü
+                if (!firmId) {
+                    Swal.showValidationMessage('Lütfen bir Operatör seçiniz.');
+                    return false;
+                }
+                if (!typeId) {
+                    Swal.showValidationMessage('Lütfen bir Operatör Tipi seçiniz.');
+                    return false;
+                }
+                if (!systemName) {
+                    Swal.showValidationMessage('Sistem Adı boş bırakılamaz.');
+                    return false;
+                }
+                if (!displayName) {
+                    Swal.showValidationMessage('Site Görünen Adı boş bırakılamaz.');
+                    return false;
+                }
+                if (!minNoLength || isNaN(minNoLength) || minNoLength < 1) {
+                    Swal.showValidationMessage('Min Abone No Uzunluğu geçerli bir sayı olmalıdır.');
+                    return false;
+                }
+                if (!maxNoLength || isNaN(maxNoLength) || maxNoLength < minNoLength) {
+                    Swal.showValidationMessage('Max Abone No Uzunluğu geçerli bir sayı olmalı ve Min uzunluktan büyük olmalıdır.');
+                    return false;
+                }
+                if (!bgColor) {
+                    Swal.showValidationMessage('Lütfen bir Arkaplan Rengi seçiniz.');
+                    return false;
+                }
+                if (!txtColor) {
+                    Swal.showValidationMessage('Lütfen bir Yazı Rengi seçiniz.');
+                    return false;
+                }
+
+                return {
+                    firmId: firmId,
+                    typeId: typeId,
+                    systemName: systemName,
+                    displayName: displayName,
+                    minNoLength: minNoLength,
+                    maxNoLength: maxNoLength,
+                    bgColor: bgColor,
+                    txtColor: txtColor,
+                    isActive: $('#isActive').prop('checked')
+                };
+            },
+            didOpen: function () {
+                // Firma Listesi Çekme
+                $.ajax({
+                    url: '/Operator/GetFirms',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var firmDropdown = $('#firmId');
+                        data.data.forEach(function (item) {
+                            firmDropdown.append(`<option value="${item.id}">${item.firmName}</option>`);
+                        });
+                    },
+                    error: function () {
+                        Swal.fire('Hata!', 'Firma verileri yüklenemedi.', 'error');
+                    }
+                });
+
+                // Operatör Tipi Listesi Çekme
+                $.ajax({
+                    url: '/Operator/GetTypes',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var typeDropdown = $('#typeId');
+                        data.data.forEach(function (item) {
+                            typeDropdown.append(`<option value="${item.id}">${item.typeName}</option>`);
+                        });
+                    },
+                    error: function () {
+                        Swal.fire('Hata!', 'Operatör tipi verileri yüklenemedi.', 'error');
+                    }
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Operator/AjaxCreateOperator',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function (response) {
+                        Swal.fire('Başarılı!', response.message, 'success').then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function () {
+                        Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                    }
+                });
+            }
+        });
+    }
+
+       function editOperator(operatorId) {
+        // Önce AJAX ile mevcut verileri al
+        $.ajax({
+            url: '/Operator/AjaxGetOperator/' + operatorId,
+            type: 'GET',
+            success: function (data) {
+                if (!data.success) {
+                    Swal.fire('Hata!', data.message, 'error');
+                    return;
+                }
+
+                // Swal modal oluştur
+                Swal.fire({
+                    title: 'Operatör Düzenle',
+                    html:
+                        // Firma ve Tip dropdownları eklendi
+                        '<select id="firmId" class="form-control mb-3">' +
+                            '<option value="">Firma Seçiniz</option>' +
+                        '</select>' +
+                        '<select id="typeId" class="form-control mb-3">' +
+                            '<option value="">Tip Seçiniz</option>' +
+                        '</select>' +
+                        '<input id="systemName" class="form-control mb-3" value="' + data.operatorData.systemName + '" placeholder="Sistem Adı">' +
+                        '<input id="displayName" class="form-control mb-3" value="' + data.operatorData.displayName + '" placeholder="Görünecek Adı">' +
+                        '<input id="minNoLength" class="form-control mb-3" type="number" value="' + data.operatorData.minSubscriberNoLength + '" placeholder="Min Abone No Uzunluğu">' +
+                        '<input id="maxNoLength" class="form-control mb-3" type="number" value="' + data.operatorData.maxSubscriberNoLength + '" placeholder="Max Abone No Uzunluğu">' +
+
+                        '<div class="row mb-3">' +
+                            '<div class="col-6">' +
+                                '<label class="form-label">Arkaplan Rengi:</label>' +
+                                '<input id="bgColor" class="form-control form-control-color" type="color" value="' + data.operatorData.backgroundColor + '">' +
+                            '</div>' +
+                            '<div class="col-6">' +
+                                '<label class="form-label">Yazı Rengi:</label>' +
+                                '<input id="txtColor" class="form-control form-control-color" type="color" value="' + data.operatorData.textColor + '">' +
+                            '</div>' +
+                        '</div>' +
+
+                        '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                            '<label class="form-label" for="isActive">Aktif / Pasif</label>' +
+                            '<div class="form-check form-switch form-switch-lg">' +
+                                '<input class="form-check-input" type="checkbox" id="isActive" ' + (data.operatorData.isActive ? 'checked' : '') + '>' +
+                            '</div>' +
+                        '</div>',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Kaydet',
+                    preConfirm: () => {
+                        let firmId = $('#firmId').val();
+                        let typeId = $('#typeId').val();
+                        let systemName = $('#systemName').val().trim();
+                        let displayName = $('#displayName').val().trim();
+                        let minNoLength = $('#minNoLength').val().trim();
+                        let maxNoLength = $('#maxNoLength').val().trim();
+                        let bgColor = $('#bgColor').val();
+                        let txtColor = $('#txtColor').val();
+
+                        if (!firmId) {
+                            Swal.showValidationMessage('Lütfen bir Firma seçiniz.');
+                            return false;
+                        }
+                        if (!typeId) {
+                            Swal.showValidationMessage('Lütfen bir Tip seçiniz.');
+                            return false;
+                        }
+                        if (!systemName) {
+                            Swal.showValidationMessage('Sistem Adı boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!displayName) {
+                            Swal.showValidationMessage('Görünecek Adı boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!minNoLength || isNaN(minNoLength) || minNoLength < 1) {
+                            Swal.showValidationMessage('Min Abone No Uzunluğu geçerli bir sayı olmalıdır.');
+                            return false;
+                        }
+                        if (!maxNoLength || isNaN(maxNoLength) || maxNoLength < minNoLength) {
+                            Swal.showValidationMessage('Max Abone No Uzunluğu geçerli bir sayı olmalı ve Min uzunluktan büyük olmalıdır.');
+                            return false;
+                        }
+                        if (!bgColor) {
+                            Swal.showValidationMessage('Lütfen bir Arkaplan Rengi seçiniz.');
+                            return false;
+                        }
+                        if (!txtColor) {
+                            Swal.showValidationMessage('Lütfen bir Yazı Rengi seçiniz.');
+                            return false;
+                        }
+
+                        return {
+                         id: operatorId,
+        firmId: firmId,
+        typeId: typeId,
+        systemName: systemName,
+        displayName: displayName,
+        MinSubscriberNoLength: minNoLength, // Modeldeki isimle uyumlu
+        MaxSubscriberNoLength: maxNoLength, // Modeldeki isimle uyumlu
+        BackgroundColor: bgColor,           // Modeldeki isimle uyumlu
+        TextColor: txtColor,                // Modeldeki isimle uyumlu
+        isActive: $('#isActive').prop('checked')
+                        };
+                    },
+                    didOpen: () => {
+                        // Firma Listesi Çekme
+                        $.ajax({
+                            url: '/Operator/GetFirms',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (firms) {
+                                var firmDropdown = $('#firmId');
+                                firms.data.forEach(function (firm) {
+                                    var selected = firm.id === data.operatorData.firmId ? 'selected' : '';
+                                    firmDropdown.append(`<option value="${firm.id}" ${selected}>${firm.firmName}</option>`);
+                                });
+                            },
+                            error: function () {
+                                Swal.fire('Hata!', 'Firma verileri yüklenemedi.', 'error');
+                            }
+                        });
+
+                        // Operatör Tipi Listesi Çekme
+                        $.ajax({
+                            url: '/Operator/GetTypes',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (types) {
+                                var typeDropdown = $('#typeId');
+                                types.data.forEach(function (type) {
+                                    var selected = type.id === data.operatorData.typeId ? 'selected' : '';
+                                    typeDropdown.append(`<option value="${type.id}" ${selected}>${type.typeName}</option>`);
+                                });
+                            },
+                            error: function () {
+                                Swal.fire('Hata!', 'Operatör tipi verileri yüklenemedi.', 'error');
+                            }
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/Operator/UpdateOperator',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(result.value),
+                            success: function (response) {
+                                Swal.fire('Başarılı!', response.message, 'success').then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function () {
+                                Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                Swal.fire('Hata!', 'Operatör bilgileri alınamadı.', 'error');
+            }
+        });
+    }
+
+          // Dinamik olarak oluşturulan switch checkbox değişikliklerini yakalayalım
+    $(document).on('change', '.code-switcher', function() {
+        var checkbox = $(this);
+        // id "isActive_{id}" şeklinde olduğundan, id'yi ayıklıyoruz
+        var operatorId = checkbox.attr('id').split('_')[1];
+        var isActive = checkbox.is(':checked');
+
+        // AJAX çağrısı ile güncelleme işlemi yapılıyor
+        $.ajax({
+            url: '/Operator/UpdateOperatorStatus', // Uygun endpoint'iniz
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: operatorId, isActive: isActive }),
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                // İsterseniz burada satırın görünümünü de güncelleyebilirsiniz.
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Durum güncellenemedi.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                // Hata durumunda checkbox eski haline döndürülüyor
+                checkbox.prop('checked', !isActive);
+            }
+        });
+    });
+
+</script>
