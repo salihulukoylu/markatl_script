@@ -60,6 +60,11 @@ app.MapControllerRoute(
 
 
 app.MapControllerRoute(
+    name: "banka-ayarlari",
+    pattern: "BankaAyarlari",
+    defaults: new { controller = "Banka", action = "BankaAyarlari" });
+
+app.MapControllerRoute(
     name: "operator-ayarlari",
     pattern: "OperatorAyarlari",
     defaults: new { controller = "Operator", action = "OperatorSettings" });

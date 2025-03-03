@@ -1,0 +1,360 @@
+﻿@model IEnumerable<MarkaTLScript.Models.BankAccount>
+
+@{
+    ViewBag.Title = "Banka Ayarları";
+    ViewBag.pTitle = "Banka Ayarları";
+    ViewBag.pageTitle = "Banka Ayarları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var alertMessage = TempData["SweetAlertMessage"] as string;
+    var alertType = TempData["SweetAlertType"] as string;
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+    <script>
+        Swal.fire({
+            icon: '@alertType',
+            title: '@alertMessage'
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Bankalar</h4>
+                <button class="btn btn-success" onclick="openBankModal()">+ Yeni Banka Ekle</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Banka Adı</th>
+                                <th>Hesap Sahibi</th>
+                                <!-- <th>Banka Logo</th> -->
+                                <th>Şube Kodu</th>
+                                <th>Hesap No</th>
+                                <th>İban</th>
+                                <th>Min Yatırılabilir Tutar</th>
+                                <th>Bayiye Görünür</th>
+                                <th>Aktif</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.BankName</td>
+                                        <td>@item.AccountHolder</td>
+                                        <!--
+                                        <td>
+                                        @if (!string.IsNullOrEmpty(item.BankLogo))
+                                        {
+                                                    <img src="@item.BankLogo" style="width:30px;" alt="Banka Logo" />
+                                        }
+                                        </td>
+                                        -->
+                                        <td>@item.BranchCode</td>
+                                        <td>@item.AccountNo</td>
+                                        <td>@item.Iban</td>
+                                        <td>@item.MinDepositAmount.ToString("N2")</td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input visible-switch" type="checkbox" id="visibleToReseller_@item.Id" @(item.VisibleToReseller ? "checked" : "")>
+                                                <label class="form-check-label" for="visibleToReseller_@item.Id">Görünür</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch form-switch-lg">
+                                                <input class="form-check-input code-switcher" type="checkbox" id="isActive_@item.Id" @(item.Active ? "checked" : "")>
+                                                <label class="form-check-label" for="isActive_@item.Id">Aktif / Pasif</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a onclick="editBank(@item.Id)" class="btn btn-warning btn-sm">Düzenle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="9" class="text-center">Kayıt bulunamadı</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openBankModal() {
+        Swal.fire({
+            title: 'Yeni Banka Ekle',
+            html:
+                '<input id="bankName" class="form-control mb-3" placeholder="Banka Adı">' +
+                '<input id="accountHolder" class="form-control mb-3" placeholder="Hesap Sahibi">' +
+                // '<input id="bankLogo" class="form-control mb-3" placeholder="Banka Logo URL">' +
+                '<input id="branchCode" class="form-control mb-3" placeholder="Şube Kodu">' +
+                '<input id="accountNo" class="form-control mb-3" placeholder="Hesap No">' +
+                '<input id="iban" class="form-control mb-3" placeholder="İban">' +
+                '<input id="minDepositAmount" class="form-control mb-3" type="number" placeholder="Min Yatırılabilir Tutar">' +
+                '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                '   <label class="form-label" for="visibleToReseller">Bayiye Görünür</label>' +
+                '   <div class="form-check form-switch form-switch-lg">' +
+                '       <input class="form-check-input" type="checkbox" id="visibleToReseller" checked>' +
+                '   </div>' +
+                '</div>' +
+                '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                '   <label class="form-label" for="isActive">Aktif</label>' +
+                '   <div class="form-check form-switch form-switch-lg">' +
+                '       <input class="form-check-input" type="checkbox" id="isActive" checked>' +
+                '   </div>' +
+                '</div>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            preConfirm: () => {
+                let bankName = $('#bankName').val().trim();
+                let accountHolder = $('#accountHolder').val().trim();
+                // let bankLogo = $('#bankLogo').val().trim();
+                let branchCode = $('#branchCode').val().trim();
+                let accountNo = $('#accountNo').val().trim();
+                let iban = $('#iban').val().trim();
+                let minDepositAmount = $('#minDepositAmount').val().trim();
+
+                if (!bankName) {
+                    Swal.showValidationMessage('Banka Adı boş bırakılamaz.');
+                    return false;
+                }
+                if (!accountHolder) {
+                    Swal.showValidationMessage('Hesap Sahibi boş bırakılamaz.');
+                    return false;
+                }
+                if (!accountNo) {
+                    Swal.showValidationMessage('Hesap No boş bırakılamaz.');
+                    return false;
+                }
+                if (!iban) {
+                    Swal.showValidationMessage('İban boş bırakılamaz.');
+                    return false;
+                }
+                if (!minDepositAmount || isNaN(minDepositAmount) || parseFloat(minDepositAmount) < 0) {
+                    Swal.showValidationMessage('Min Yatırılabilir Tutar geçerli bir sayı olmalıdır.');
+                    return false;
+                }
+
+                return {
+                    bankName: bankName,
+                    accountHolder: accountHolder,
+                    // bankLogo: bankLogo,
+                    branchCode: branchCode,
+                    accountNo: accountNo,
+                    iban: iban,
+                    minDepositAmount: parseFloat(minDepositAmount),
+                    visibleToReseller: $('#visibleToReseller').prop('checked'),
+                    active: $('#isActive').prop('checked')
+                };
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Banka/AjaxCreateBank',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function (response) {
+                        Swal.fire('Başarılı!', response.message, 'success').then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function () {
+                        Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                    }
+                });
+            }
+        });
+    }
+
+    function editBank(bankId) {
+        $.ajax({
+            url: '/Banka/AjaxGetBank/' + bankId,
+            type: 'GET',
+            success: function (data) {
+                if (!data.success) {
+                    Swal.fire('Hata!', data.message, 'error');
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'Banka Düzenle',
+                    html:
+                        '<input id="bankName" class="form-control mb-3" placeholder="Banka Adı" value="' + data.bankData.bankName + '">' +
+                        '<input id="accountHolder" class="form-control mb-3" placeholder="Hesap Sahibi" value="' + data.bankData.accountHolder + '">' +
+                        // '<input id="bankLogo" class="form-control mb-3" placeholder="Banka Logo URL" value="' + data.bankData.bankLogo + '">' +
+                        '<input id="branchCode" class="form-control mb-3" placeholder="Şube Kodu" value="' + data.bankData.branchCode + '">' +
+                        '<input id="accountNo" class="form-control mb-3" placeholder="Hesap No" value="' + data.bankData.accountNo + '">' +
+                        '<input id="iban" class="form-control mb-3" placeholder="İban" value="' + data.bankData.iban + '">' +
+                        '<input id="minDepositAmount" class="form-control mb-3" type="number" placeholder="Min Yatırılabilir Tutar" value="' + data.bankData.minDepositAmount + '">' +
+                        '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '   <label class="form-label" for="visibleToReseller">Bayiye Görünür</label>' +
+                        '   <div class="form-check form-switch form-switch-lg">' +
+                        '       <input class="form-check-input" type="checkbox" id="visibleToReseller" ' + (data.bankData.visibleToReseller ? 'checked' : '') + '>' +
+                        '   </div>' +
+                        '</div>' +
+                        '<div class="d-flex justify-content-between align-items-center mb-3">' +
+                        '   <label class="form-label" for="isActive">Aktif</label>' +
+                        '   <div class="form-check form-switch form-switch-lg">' +
+                        '       <input class="form-check-input" type="checkbox" id="isActive" ' + (data.bankData.active ? 'checked' : '') + '>' +
+                        '   </div>' +
+                        '</div>',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Kaydet',
+                    preConfirm: () => {
+                        let bankName = $('#bankName').val().trim();
+                        let accountHolder = $('#accountHolder').val().trim();
+                        // let bankLogo = $('#bankLogo').val().trim();
+                        let branchCode = $('#branchCode').val().trim();
+                        let accountNo = $('#accountNo').val().trim();
+                        let iban = $('#iban').val().trim();
+                        let minDepositAmount = $('#minDepositAmount').val().trim();
+
+                        if (!bankName) {
+                            Swal.showValidationMessage('Banka Adı boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!accountHolder) {
+                            Swal.showValidationMessage('Hesap Sahibi boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!accountNo) {
+                            Swal.showValidationMessage('Hesap No boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!iban) {
+                            Swal.showValidationMessage('İban boş bırakılamaz.');
+                            return false;
+                        }
+                        if (!minDepositAmount || isNaN(minDepositAmount) || parseFloat(minDepositAmount) < 0) {
+                            Swal.showValidationMessage('Min Yatırılabilir Tutar geçerli bir sayı olmalıdır.');
+                            return false;
+                        }
+
+                        return {
+                            id: bankId,
+                            bankName: bankName,
+                            accountHolder: accountHolder,
+                            // bankLogo: bankLogo,
+                            branchCode: branchCode,
+                            accountNo: accountNo,
+                            iban: iban,
+                            minDepositAmount: parseFloat(minDepositAmount),
+                            visibleToReseller: $('#visibleToReseller').prop('checked'),
+                            active: $('#isActive').prop('checked')
+                        };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+                        $.ajax({
+                            url: '/Banka/UpdateBank',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(result.value),
+                            success: function (response) {
+                                Swal.fire('Başarılı!', response.message, 'success').then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function () {
+                                Swal.fire('Hata!', 'Bir hata oluştu.', 'error');
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                Swal.fire('Hata!', 'Banka bilgileri alınamadı.', 'error');
+            }
+        });
+    }
+
+    $(document).on('change', '.code-switcher', function() {
+        var checkbox = $(this);
+        var bankId = checkbox.attr('id').split('_')[1];
+        var isActive = checkbox.is(':checked');
+
+        $.ajax({
+            url: '/Banka/UpdateBankStatus',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: bankId, active: isActive }),
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Durum güncellenemedi.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                checkbox.prop('checked', !isActive);
+            }
+        });
+    });
+
+
+    $(document).on('change', '.visible-switch', function() {
+        var checkbox = $(this);
+        var bankId = checkbox.attr('id').split('_')[1];
+        var visibleToReseller = checkbox.is(':checked');
+
+        $.ajax({
+            url: '/Banka/UpdateVisibleStatus', // Controller'daki ilgili action
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: bankId, visibleToReseller: visibleToReseller }),
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Durum güncellenemedi.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                checkbox.prop('checked', !visibleToReseller);
+            }
+        });
+    });
+
+
+</script>

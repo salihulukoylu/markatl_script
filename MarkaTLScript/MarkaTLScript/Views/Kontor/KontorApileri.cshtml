@@ -384,7 +384,9 @@
                     '<option value="Borç Ödeme">Borç Ödeme</option>' +
                     '<option value="Nakit Bakiye">Nakit Bakiye</option>' +
                 '</select>' +
-                '<input id="bankSelection" class="form-control mb-3" placeholder="Banka Seçiniz (veya Banka Adı)">' +
+                '<select id="bankSelection" class="form-control mb-3">' +
+                    '<option value="">Banka Seçiniz</option>' +
+                '</select>' +
                 '<input id="amount" class="form-control mb-3" type="number" placeholder="Tutar">' +
                 '<textarea id="transactionDescription" class="form-control mb-3" placeholder="Açıklama"></textarea>',
             focusConfirm: false,
@@ -392,7 +394,7 @@
             confirmButtonText: 'İşlemi Kaydet',
             preConfirm: () => {
                 let transactionType = $('#transactionType').val();
-                let bankSelection = $('#bankSelection').val().trim();
+                let bankId = $('#bankSelection').val();
                 let amount = $('#amount').val().trim();
                 let transactionDescription = $('#transactionDescription').val().trim();
 
@@ -400,17 +402,40 @@
                     Swal.showValidationMessage('Lütfen işlem türünü seçiniz.');
                     return false;
                 }
-                if (!amount || isNaN(amount) || amount <= 0) {
+                if (!bankId) {
+                    Swal.showValidationMessage('Lütfen banka seçiniz.');
+                    return false;
+                }
+                if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
                     Swal.showValidationMessage('Lütfen geçerli bir tutar giriniz.');
                     return false;
                 }
                 return {
                     apiDefinitionId: apiId,
                     transactionType: transactionType,
-                    bankSelection: bankSelection,
+                    bankId: parseInt(bankId),
                     amount: parseFloat(amount),
                     description: transactionDescription
                 };
+            },
+            didOpen: () => {
+                // Banka listesini çekiyoruz
+                $.ajax({
+                    url: '/Api/GetBanks',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var bankDropdown = $('#bankSelection');
+                        bankDropdown.empty();
+                        bankDropdown.append('<option value="">Banka Seçiniz</option>');
+                        data.data.forEach(function (bank) {
+                            bankDropdown.append(`<option value="${bank.id}">${bank.bankName} - ${bank.accountHolder}</option>`);
+                        });
+                    },
+                    error: function () {
+                        Swal.fire('Hata!', 'Banka verileri yüklenemedi.', 'error');
+                    }
+                });
             }
         }).then((result) => {
             if (result.isConfirmed && result.value) {
@@ -419,10 +444,10 @@
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(result.value),
-                    success: function(response) {
+                    success: function (response) {
                         Swal.fire('Başarılı!', response.message, 'success');
                     },
-                    error: function() {
+                    error: function () {
                         Swal.fire('Hata!', 'Bakiye işlemi kaydedilemedi.', 'error');
                     }
                 });
@@ -431,24 +456,31 @@
     }
 
     // Yeni: API hesap hareketlerini görüntülemek için modal açma
-    function openAccountMovementsModal(apiId) {
+     function openAccountMovementsModal(apiId) {
         $.ajax({
             url: '/Api/ListAccountMovements?apiDefinitionId=' + apiId,
             type: 'GET',
             success: function(response) {
                 if (response.success) {
                     let html = '<table class="table table-bordered"><thead><tr>' +
-                               '<th>Tarih</th><th>Tip</th><th>Tutar</th><th>Önceki Bakiye</th><th>Yeni Bakiye</th><th>Açıklama</th>' +
+                               '<th>Tarih</th>' +
+                               '<th>Tip</th>' +
+                               '<th>Banka</th>' +
+                               '<th>Tutar</th>' +
+                               '<th>Önceki Bakiye</th>' +
+                               '<th>Yeni Bakiye</th>' +
+                               '<th>Açıklama</th>' +
                                '</tr></thead><tbody>';
                     response.data.forEach(function(item) {
                         html += `<tr>
                                     <td>${item.transactionDate}</td>
                                     <td>${item.movementType}</td>
+                                    <td>${item.bankInfo || ''}</td>
                                     <td>${item.amount}</td>
                                     <td>${item.previousBalance}</td>
                                     <td>${item.newBalance}</td>
                                     <td>${item.description}</td>
-                                </tr>`;
+                                 </tr>`;
                     });
                     html += '</tbody></table>';
                     Swal.fire({

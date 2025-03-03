@@ -24,7 +24,13 @@ public partial class DbMarkatlScriptContext : DbContext
 
     public virtual DbSet<ApiTypeList> ApiTypeLists { get; set; }
 
+    public virtual DbSet<BankAccount> BankAccounts { get; set; }
+
     public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
+
+    public virtual DbSet<ExpenseCategory> ExpenseCategories { get; set; }
+
+    public virtual DbSet<IncomeCategory> IncomeCategories { get; set; }
 
     public virtual DbSet<Operator> Operators { get; set; }
 
@@ -68,7 +74,7 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnName("description");
             entity.Property(e => e.MovementType)
                 .IsRequired()
-                .HasColumnType("enum('Gelir','Gider')")
+                .HasMaxLength(250)
                 .HasColumnName("movement_type");
             entity.Property(e => e.NewBalance)
                 .HasPrecision(10, 2)
@@ -188,6 +194,50 @@ public partial class DbMarkatlScriptContext : DbContext
                 .HasColumnName("type_name");
         });
 
+        modelBuilder.Entity<BankAccount>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("bank_accounts");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.AccountHolder)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("account_holder");
+            entity.Property(e => e.AccountNo)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasColumnName("account_no");
+            entity.Property(e => e.Active)
+                .IsRequired()
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("active");
+            entity.Property(e => e.BankLogo)
+                .HasMaxLength(255)
+                .HasColumnName("bank_logo");
+            entity.Property(e => e.BankName)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("bank_name");
+            entity.Property(e => e.BranchCode)
+                .HasMaxLength(10)
+                .HasColumnName("branch_code");
+            entity.Property(e => e.Iban)
+                .IsRequired()
+                .HasMaxLength(34)
+                .HasColumnName("iban");
+            entity.Property(e => e.MinDepositAmount)
+                .HasPrecision(10, 2)
+                .HasColumnName("min_deposit_amount");
+            entity.Property(e => e.VisibleToReseller)
+                .IsRequired()
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("visible_to_reseller");
+        });
+
         modelBuilder.Entity<EfmigrationsHistory>(entity =>
         {
             entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
@@ -201,6 +251,42 @@ public partial class DbMarkatlScriptContext : DbContext
             entity.Property(e => e.ProductVersion)
                 .IsRequired()
                 .HasMaxLength(32);
+        });
+
+        modelBuilder.Entity<ExpenseCategory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("expense_categories");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IsActive)
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("is_active");
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(255)
+                .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<IncomeCategory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("income_categories");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.IsActive)
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("is_active");
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(255)
+                .HasColumnName("title");
         });
 
         modelBuilder.Entity<Operator>(entity =>

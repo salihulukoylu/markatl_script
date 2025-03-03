@@ -32,6 +32,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29udG9yXE9wZXJhdG9yQXlhcmxhcmkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Muhasebe/GelirKayitlari.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVoYXNlYmVcR2VsaXJLYXlpdGxhcmkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Muhasebe/GiderKayitlari.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXVoYXNlYmVcR2lkZXJLYXlpdGxhcmkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Odeme/BankaAyarlari.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2RlbWVcQmFua2FBeWFybGFyaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/repos/markatl_script/MarkaTLScript/MarkaTLScript/Views/Settings/BildirimAyarlari.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ3NcQmlsZGlyaW1BeWFybGFyaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

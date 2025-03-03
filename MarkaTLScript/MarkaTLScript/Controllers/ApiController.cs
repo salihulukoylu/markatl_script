@@ -254,14 +254,15 @@ namespace MarkaTLScript.Controllers
                     .Select(m => m.NewBalance)
                     .FirstOrDefaultAsync();
 
-                // Yeni bakiye hesaplanır
-                decimal newBalance = currentBalance + dto.Amount; // Örneğin, ekleme işlemi için
+                // Yeni bakiye hesaplanır (örneğin, ekleme işlemi için)
+                decimal newBalance = currentBalance + dto.Amount;
 
                 // ApiAccountMovement kaydı oluşturulur
                 var accountMovement = new ApiAccountMovement
                 {
                     ApiDefinitionId = dto.ApiDefinitionId,
-                    MovementType = "Bakiye Güncelleme", // Örnek işlem türü
+                    // Modalda seçilen işlem türü burada movement_type olarak kullanılacak
+                    MovementType = dto.TransactionType,
                     Amount = dto.Amount,
                     PreviousBalance = currentBalance,
                     NewBalance = newBalance,
@@ -283,13 +284,39 @@ namespace MarkaTLScript.Controllers
 
         // API hesap hareketlerini listeleyen endpoint
         [HttpGet]
+  
         public async Task<IActionResult> ListAccountMovements(int apiDefinitionId)
         {
             try
             {
-                var movements = await _db.ApiAccountMovements
-                    .Where(m => m.ApiDefinitionId == apiDefinitionId)
-                    .OrderByDescending(m => m.TransactionDate)
+                var movements = await (
+                    from movement in _db.ApiAccountMovements
+                        // ApiBalanceTransaction tablosu ile transaction tarihi üzerinden join yapıyoruz.
+                    join trans in _db.ApiBalanceTransactions
+                        on movement.TransactionDate equals trans.TransactionDate into transJoin
+                    from trans in transJoin.DefaultIfEmpty()
+                    where movement.ApiDefinitionId == apiDefinitionId
+                    orderby movement.TransactionDate descending
+                    select new
+                    {
+                        movement.Id,
+                        movement.ApiDefinitionId,
+                        // İşlem tipi (örneğin: "Borç Bakiye Ekleme", "Nakit Bakiye", "Borç Ödeme" vb.)
+                        MovementType = movement.MovementType,
+                        movement.Amount,
+                        movement.PreviousBalance,
+                        movement.NewBalance,
+                        movement.TransactionDate,
+                        movement.Description,
+                        // Banka bilgisi: Eğer ilgili ApiBalanceTransaction kaydında BankId varsa, 
+                        // BankAccounts tablosundan "Banka Adı - Hesap Sahibi" bilgisini getiriyoruz.
+                        BankInfo = trans != null && trans.BankId != null
+                            ? _db.BankAccounts
+                                .Where(b => b.Id == trans.BankId.Value)
+                                .Select(b => b.BankName + " - " + b.AccountHolder)
+                                .FirstOrDefault()
+                            : ""
+                    })
                     .ToListAsync();
 
                 return Json(new { success = true, data = movements });
@@ -300,6 +327,7 @@ namespace MarkaTLScript.Controllers
                 return Json(new { success = false, message = "Hesap hareketleri alınırken hata oluştu." });
             }
         }
+
 
         // API'ler arası virman işlemi örneği: Belirli bir API'den çıkarıp başka bir API'ye ekleme işlemi
         [HttpPost]
@@ -349,6 +377,16 @@ namespace MarkaTLScript.Controllers
             }
         }
 
+
+        // GET: /Api/GetBanks
+        [HttpGet]
+        public async Task<IActionResult> GetBanks()
+        {
+            var banks = await _db.BankAccounts
+                .Select(b => new { id = b.Id, bankName = b.BankName, accountHolder = b.AccountHolder })
+                .ToListAsync();
+            return Ok(new { data = banks });
+        }
     }
 
     public class ApiBalanceTransactionDto
