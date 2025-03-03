@@ -54,6 +54,16 @@ app.MapControllerRoute(
 // Özel rotalar
 
 app.MapControllerRoute(
+    name: "gider-kayitlari",
+    pattern: "GiderKayitlari",
+    defaults: new { controller = "Expense", action = "GiderKayitlari" });
+
+app.MapControllerRoute(
+    name: "gelir-kayitlari",
+    pattern: "GelirKayitlari",
+    defaults: new { controller = "Income", action = "GelirKayitlari" });
+
+app.MapControllerRoute(
     name: "Kontor-ayarlari",
     pattern: "KontorApileri",
     defaults: new { controller = "Api", action = "ApiListesi" });

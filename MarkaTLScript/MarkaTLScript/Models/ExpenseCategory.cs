@@ -10,4 +10,6 @@ public partial class ExpenseCategory
     public string Title { get; set; }
 
     public bool? IsActive { get; set; }
+
+    public virtual ICollection<BankAccountMovement> BankAccountMovements { get; set; } = new List<BankAccountMovement>();
 }

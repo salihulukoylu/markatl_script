@@ -4,6 +4,8 @@ using MarkaTLScript.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using MarkaTLScript.ViewModels;
+using System.Collections.Generic;
 
 namespace MarkaTLScript.Controllers
 {
@@ -24,13 +26,60 @@ namespace MarkaTLScript.Controllers
             try
             {
                 var banks = await _db.BankAccounts.ToListAsync();
-                return View("~/Views/Odeme/BankaAyarlari.cshtml", banks);
+                var viewModels = new List<BankAccountViewModel>();
+
+                foreach (var bank in banks)
+                {
+                    // Sum income movements for this bank
+                    var income = await _db.BankAccountMovements
+                        .Where(m => m.BankId == bank.Id && m.TransactionType.ToLower() == "income")
+                        .SumAsync(m => (decimal?)m.Amount) ?? 0;
+
+                    // Sum expense movements for this bank
+                    var expense = await _db.BankAccountMovements
+                        .Where(m => m.BankId == bank.Id && m.TransactionType.ToLower() == "expense")
+                        .SumAsync(m => (decimal?)m.Amount) ?? 0;
+
+                    viewModels.Add(new BankAccountViewModel
+                    {
+                        BankAccount = bank,
+                        Balance = income - expense
+                    });
+                }
+
+                return View("~/Views/Odeme/BankaAyarlari.cshtml", viewModels);
             }
             catch (Exception ex)
             {
                 _logService.LogError(ex, nameof(BankaController), nameof(BankaAyarlari));
                 TempData["ErrorMessage"] = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
-                return View("~/Views/Odeme/BankaAyarlari.cshtml", Enumerable.Empty<BankAccount>());
+                return View("~/Views/Odeme/BankaAyarlari.cshtml", Enumerable.Empty<BankAccountViewModel>());
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListAccountMovements(int bankId)
+        {
+            try
+            {
+                var movements = await _db.BankAccountMovements
+                    .Where(m => m.BankId == bankId)
+                    .OrderByDescending(m => m.TransactionDate)
+                    .Select(m => new
+                    {
+                        transactionDate = m.TransactionDate.ToString("yyyy-MM-dd HH:mm"),
+                        transactionType = m.TransactionType,
+                        amount = m.Amount,
+                        description = m.Description
+                    })
+                    .ToListAsync();
+
+                return Json(new { success = true, data = movements });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(ListAccountMovements));
+                return Json(new { success = false, message = "Hesap hareketleri alınırken hata oluştu." });
             }
         }
 
@@ -178,6 +227,140 @@ namespace MarkaTLScript.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> AjaxGetBanks()
+        {
+            try
+            {
+                var banks = await _db.BankAccounts
+                    .Select(b => new
+                    {
+                        id = b.Id,
+                        bankName = b.BankName,
+                        accountHolder = b.AccountHolder
+                    })
+                    .ToListAsync();
+                return Json(new { success = true, data = banks });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(AjaxGetBanks));
+                return Json(new { success = false, message = "Banka verileri alınırken hata oluştu." });
+            }
+        }
+
+        // GET: /Banka/GetIncomeCategories
+        [HttpGet]
+        public async Task<IActionResult> AjaxGetIncomeCategories()
+        {
+            try
+            {
+                var incomeCategories = await _db.IncomeCategories
+                    .Select(ic => new
+                    {
+                        id = ic.Id,
+                        title = ic.Title
+                    })
+                    .ToListAsync();
+                return Json(new { success = true, data = incomeCategories });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(AjaxGetIncomeCategories));
+                return Json(new { success = false, message = "Gelir kalemleri alınırken hata oluştu." });
+            }
+        }
+
+        // GET: /Banka/GetExpenseCategories
+        [HttpGet]
+        public async Task<IActionResult> AjaxGetExpenseCategories()
+        {
+            try
+            {
+                var expenseCategories = await _db.ExpenseCategories
+                    .Select(ec => new
+                    {
+                        id = ec.Id,
+                        title = ec.Title
+                    })
+                    .ToListAsync();
+                return Json(new { success = true, data = expenseCategories });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(AjaxGetExpenseCategories));
+                return Json(new { success = false, message = "Gider kalemleri alınırken hata oluştu." });
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddIncomeMovement([FromBody] IncomeMovementDto dto)
+        {
+            if (dto == null || dto.BankId <= 0 || dto.IncomeCategoryId <= 0 || dto.Amount <= 0 || string.IsNullOrEmpty(dto.TransactionDate))
+            {
+                return Json(new { success = false, message = "Gerekli bilgiler eksik." });
+            }
+
+            try
+            {
+                // Create a new bank account movement for income
+                var movement = new BankAccountMovement
+                {
+                    BankId = dto.BankId,
+                    TransactionType = "income",
+                    IncomeCategoryId = dto.IncomeCategoryId,
+                    Amount = dto.Amount,
+                    TransactionDate = DateTime.Parse(dto.TransactionDate),
+                    Description = dto.Description
+                };
+
+                _db.BankAccountMovements.Add(movement);
+                await _db.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Gelir işlemi başarıyla kaydedildi." });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(AddIncomeMovement));
+                return Json(new { success = false, message = "Gelir işlemi kaydedilirken hata oluştu." });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddExpenseMovement([FromBody] ExpenseMovementDto dto)
+        {
+            if (dto == null || dto.BankId <= 0 || dto.ExpenseCategoryId <= 0 || dto.Amount <= 0 || string.IsNullOrEmpty(dto.TransactionDate))
+            {
+                return Json(new { success = false, message = "Gerekli bilgiler eksik." });
+            }
+
+            try
+            {
+                // Create a new bank account movement for expense
+                var movement = new BankAccountMovement
+                {
+                    BankId = dto.BankId,
+                    TransactionType = "expense",
+                    ExpenseCategoryId = dto.ExpenseCategoryId,
+                    Amount = dto.Amount,
+                    TransactionDate = DateTime.Parse(dto.TransactionDate),
+                    Description = dto.Description
+                };
+
+                _db.BankAccountMovements.Add(movement);
+                await _db.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Gider işlemi başarıyla kaydedildi." });
+            }
+            catch (Exception ex)
+            {
+                _logService.LogError(ex, nameof(BankaController), nameof(AddExpenseMovement));
+                return Json(new { success = false, message = "Gider işlemi kaydedilirken hata oluştu." });
+            }
+        }
+
+
     }
 
     // This model is used for updating bank status via AJAX.
@@ -192,4 +375,24 @@ namespace MarkaTLScript.Controllers
         public int Id { get; set; }
         public bool VisibleToReseller { get; set; }
     }
+
+    public class IncomeMovementDto
+    {
+        public int BankId { get; set; }
+        public int IncomeCategoryId { get; set; }
+        public decimal Amount { get; set; }
+        public string TransactionDate { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class ExpenseMovementDto
+    {
+        public int BankId { get; set; }
+        public int ExpenseCategoryId { get; set; }
+        public decimal Amount { get; set; }
+        public string TransactionDate { get; set; }
+        public string Description { get; set; }
+    }
+
+
 }

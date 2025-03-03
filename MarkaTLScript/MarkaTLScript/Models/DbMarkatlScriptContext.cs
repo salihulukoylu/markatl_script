@@ -26,6 +26,8 @@ public partial class DbMarkatlScriptContext : DbContext
 
     public virtual DbSet<BankAccount> BankAccounts { get; set; }
 
+    public virtual DbSet<BankAccountMovement> BankAccountMovements { get; set; }
+
     public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
 
     public virtual DbSet<ExpenseCategory> ExpenseCategories { get; set; }
@@ -236,6 +238,62 @@ public partial class DbMarkatlScriptContext : DbContext
                 .IsRequired()
                 .HasDefaultValueSql("'1'")
                 .HasColumnName("visible_to_reseller");
+        });
+
+        modelBuilder.Entity<BankAccountMovement>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("bank_account_movements");
+
+            entity.HasIndex(e => e.BankId, "bank_id");
+
+            entity.HasIndex(e => e.ExpenseCategoryId, "expense_category_id");
+
+            entity.HasIndex(e => e.IncomeCategoryId, "income_category_id");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Amount)
+                .HasPrecision(10, 2)
+                .HasColumnName("amount");
+            entity.Property(e => e.BankId)
+                .HasColumnType("int(11)")
+                .HasColumnName("bank_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("current_timestamp()")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .HasColumnName("description");
+            entity.Property(e => e.ExpenseCategoryId)
+                .HasColumnType("int(11)")
+                .HasColumnName("expense_category_id");
+            entity.Property(e => e.IncomeCategoryId)
+                .HasColumnType("int(11)")
+                .HasColumnName("income_category_id");
+            entity.Property(e => e.TransactionDate)
+                .HasColumnType("datetime")
+                .HasColumnName("transaction_date");
+            entity.Property(e => e.TransactionType)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnName("transaction_type");
+
+            entity.HasOne(d => d.Bank).WithMany(p => p.BankAccountMovements)
+                .HasForeignKey(d => d.BankId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("bank_account_movements_ibfk_1");
+
+            entity.HasOne(d => d.ExpenseCategory).WithMany(p => p.BankAccountMovements)
+                .HasForeignKey(d => d.ExpenseCategoryId)
+                .HasConstraintName("bank_account_movements_ibfk_3");
+
+            entity.HasOne(d => d.IncomeCategory).WithMany(p => p.BankAccountMovements)
+                .HasForeignKey(d => d.IncomeCategoryId)
+                .HasConstraintName("bank_account_movements_ibfk_2");
         });
 
         modelBuilder.Entity<EfmigrationsHistory>(entity =>

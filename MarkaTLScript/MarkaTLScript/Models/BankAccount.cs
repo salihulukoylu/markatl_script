@@ -24,4 +24,6 @@ public partial class BankAccount
     public bool VisibleToReseller { get; set; }
 
     public bool Active { get; set; }
+
+    public virtual ICollection<BankAccountMovement> BankAccountMovements { get; set; } = new List<BankAccountMovement>();
 }

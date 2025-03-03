@@ -1,5 +1,82 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewBag.Title = "Gider Kayıtları";
+    ViewBag.pTitle = "Gider Kayıtları";
+    ViewBag.pageTitle = "Gider Kayıtları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var alertMessage = TempData["SweetAlertMessage"] as string;
+    var alertType = TempData["SweetAlertType"] as string;
+}
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+    <script>
+        Swal.fire({
+            icon: '@alertType',
+            title: '@alertMessage'
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Gider Kayıtları</h4>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-sm btn-warning" onclick="openExpenseModal()">+ Yeni Gider Ekle</a>
+                    <a class="btn btn-sm btn-success" onclick="openExpenseCategoryModal()">+ Gider Kalemi Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        function openExpenseCategoryModal() {
+        Swal.fire({
+            title: 'Yeni Gider Kalemi Ekle',
+            html:
+                '<input id="expenseTitle" class="form-control mb-3" placeholder="Başlık">' +
+                '<div class="form-check form-switch form-switch-lg">' +
+                '  <input type="checkbox" class="form-check-input" id="expenseIsActive" checked>' +
+                '  <label class="form-check-label" for="expenseIsActive">Aktif</label>' +
+                '</div>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            preConfirm: () => {
+                let title = $('#expenseTitle').val().trim();
+                let isActive = $('#expenseIsActive').prop('checked');
+
+                if (!title) {
+                    Swal.showValidationMessage('Lütfen başlık giriniz.');
+                    return false;
+                }
+                return { title: title, isActive: isActive };
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Expense/AjaxAddExpenseCategory',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire('Başarılı!', response.message, 'success').then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire('Hata!', response.message, 'error');
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Gider kalemi eklenirken bir hata oluştu.', 'error');
+                    }
+                });
+            }
+        });
+    }
+
+</script>

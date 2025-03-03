@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MarkaTLScript.Models.BankAccount>
+﻿@model IEnumerable<MarkaTLScript.ViewModels.BankAccountViewModel>
 
 @{
     ViewBag.Title = "Banka Ayarları";
@@ -27,7 +27,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title mb-0">Bankalar</h4>
-                <button class="btn btn-success" onclick="openBankModal()">+ Yeni Banka Ekle</button>
+                <button class="btn btn-sm btn-success" onclick="openBankModal()">+ Yeni Banka Ekle</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,6 +40,8 @@
                                 <th>Şube Kodu</th>
                                 <th>Hesap No</th>
                                 <th>İban</th>
+                                <th>Finans</th>
+                                <th>Bakiye</th>
                                 <th>Min Yatırılabilir Tutar</th>
                                 <th>Bayiye Görünür</th>
                                 <th>Aktif</th>
@@ -52,34 +54,46 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.BankName</td>
-                                        <td>@item.AccountHolder</td>
+                                        <td>@item.BankAccount.BankName</td>
+                                        <td>@item.BankAccount.AccountHolder</td>
                                         <!--
                                         <td>
-                                        @if (!string.IsNullOrEmpty(item.BankLogo))
+                                        @if (!string.IsNullOrEmpty(item.BankAccount.BankLogo))
                                         {
-                                                    <img src="@item.BankLogo" style="width:30px;" alt="Banka Logo" />
+                                                    <img src="@item.BankAccount.BankLogo" style="width:30px;" alt="Banka Logo" />
                                         }
                                         </td>
                                         -->
-                                        <td>@item.BranchCode</td>
-                                        <td>@item.AccountNo</td>
-                                        <td>@item.Iban</td>
-                                        <td>@item.MinDepositAmount.ToString("N2")</td>
+                                        <td>@item.BankAccount.BranchCode</td>
+                                        <td>@item.BankAccount.AccountNo</td>
+                                        <td>@item.BankAccount.Iban</td>
+                                        <td>
+                                            <button onclick="openIncomeModalForBank(@item.BankAccount.Id)" class="btn btn-sm btn-success">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button onclick="openExpenseModalForBank(@item.BankAccount.Id)" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <button onclick="openAccountMovementsModal(@item.BankAccount.Id)" class="btn btn-sm btn-info">
+                                                <i class="fa fa-list"></i>
+                                            </button>
+                                        </td>
+                                        <td>@item.Balance.ToString("N2")</td>
+                                        <td>@item.BankAccount.MinDepositAmount.ToString("N2")</td>
                                         <td>
                                             <div class="form-check form-switch form-switch-lg">
-                                                <input class="form-check-input visible-switch" type="checkbox" id="visibleToReseller_@item.Id" @(item.VisibleToReseller ? "checked" : "")>
-                                                <label class="form-check-label" for="visibleToReseller_@item.Id">Görünür</label>
+                                                <input class="form-check-input visible-switch" type="checkbox" id="visibleToReseller_@item.BankAccount.Id" @(item.BankAccount.VisibleToReseller ? "checked" : "")>
+                                                <label class="form-check-label" for="visibleToReseller_@item.BankAccount.Id">Görünür</label>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-check form-switch form-switch-lg">
-                                                <input class="form-check-input code-switcher" type="checkbox" id="isActive_@item.Id" @(item.Active ? "checked" : "")>
-                                                <label class="form-check-label" for="isActive_@item.Id">Aktif / Pasif</label>
+                                                <input class="form-check-input code-switcher" type="checkbox" id="isActive_@item.BankAccount.Id" @(item.BankAccount.Active ? "checked" : "")>
+                                                <label class="form-check-label" for="isActive_@item.BankAccount.Id">Aktif / Pasif</label>
                                             </div>
                                         </td>
                                         <td>
-                                            <a onclick="editBank(@item.Id)" class="btn btn-warning btn-sm">Düzenle</a>
+                                            <a onclick="editBank(@item.BankAccount.Id)" class="btn btn-warning btn-sm">Düzenle</a>
                                         </td>
                                     </tr>
                                 }
@@ -87,11 +101,10 @@
                             else
                             {
                                 <tr>
-                                    <td colspan="9" class="text-center">Kayıt bulunamadı</td>
+                                    <td colspan="11" class="text-center">Kayıt bulunamadı</td>
                                 </tr>
                             }
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -100,6 +113,71 @@
 </div>
 
 <script>
+
+    function openAccountMovementsModal(bankId) {
+        $.ajax({
+            url: '/Banka/ListAccountMovements?bankId=' + bankId,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    let html = '<table class="table table-bordered"><thead><tr>' +
+                               '<th>Tarih</th>' +
+                               '<th>Tip</th>' +
+                               '<th>Tutar</th>' +
+                               '<th>Açıklama</th>' +
+                               '<th>Sonuç</th>' +
+                               '</tr></thead><tbody>';
+
+                    let totalBalance = 0; // Toplam bakiye hesaplamak için değişken
+
+                    response.data.forEach(function(item) {
+                        let typeText = "";
+                        let rowColor = ""; // Satırın tamamının rengini belirlemek için
+                        let amount = parseFloat(item.amount); // Tutarı sayıya çevir
+
+                        if (item.transactionType.toLowerCase() === "income") {
+                            typeText = "Gelir";
+                            rowColor = "background-color: #d4edda; color: green;"; // Yeşil tonları
+                            totalBalance += amount; // Gelirse ekle
+                        } else if (item.transactionType.toLowerCase() === "expense") {
+                            typeText = "Gider";
+                            rowColor = "background-color: #f8d7da; color: red;"; // Kırmızı tonları
+                            totalBalance -= amount; // Giderse çıkar
+                        } else {
+                            typeText = item.transactionType;
+                            rowColor = "background-color: #f1f1f1; color: black;"; // Varsayılan gri tonu
+                        }
+
+                        html += `<tr style="${rowColor}">
+                                    <td>${item.transactionDate}</td>
+                                    <td>${typeText}</td>
+                                    <td>${item.amount}</td>
+                                    <td>${item.description}</td>
+                                    <td>${totalBalance.toFixed(2)} TL</td>
+                                 </tr>`;
+                    });
+
+                    html += '</tbody></table>';
+                    Swal.fire({
+                        title: 'Hesap Hareketleri',
+                        html: html,
+                        width: '80%'
+                    });
+                } else {
+                    Swal.fire('Hata!', response.message, 'error');
+                }
+            },
+            error: function() {
+                Swal.fire('Hata!', 'Hesap hareketleri getirilemedi.', 'error');
+            }
+        });
+    }
+
+
+
+
+
     function openBankModal() {
         Swal.fire({
             title: 'Yeni Banka Ekle',
@@ -356,5 +434,215 @@
         });
     });
 
+        function openIncomeModalForBank(bankId) {
+        Swal.fire({
+            title: 'Gelir Ekle',
+            html:
+                '<select id="incomeCategory" class="form-control mb-3">' +
+                    '<option value="">Gelir Kalemi Seçiniz</option>' +
+                '</select>' +
+                '<select id="bankSelection" class="form-control mb-3">' +
+                    '<option value="">Hangi Bankaya?</option>' +
+                '</select>' +
+                '<input id="incomeAmount" type="number" class="form-control mb-3" placeholder="İşlem Tutarı">' +
+                '<input id="incomeDate" type="date" class="form-control mb-3" value="' + new Date().toISOString().split("T")[0] + '">' +
+                '<textarea id="incomeDescription" class="form-control mb-3" placeholder="Açıklama"></textarea>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            preConfirm: () => {
+                let incomeCategoryId = $('#incomeCategory').val();
+                let selectedBankId = $('#bankSelection').val();
+                let amount = $('#incomeAmount').val();
+                let date = $('#incomeDate').val();
+                let description = $('#incomeDescription').val().trim();
+
+                if (!incomeCategoryId) {
+                    Swal.showValidationMessage('Lütfen gelir kalemi seçiniz.');
+                    return false;
+                }
+                if (!selectedBankId) {
+                    Swal.showValidationMessage('Lütfen banka seçiniz.');
+                    return false;
+                }
+                if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+                    Swal.showValidationMessage('Lütfen geçerli bir tutar giriniz.');
+                    return false;
+                }
+                if (!date) {
+                    Swal.showValidationMessage('Lütfen işlem tarihi giriniz.');
+                    return false;
+                }
+                return {
+                    bankId: parseInt(selectedBankId),
+                    incomeCategoryId: parseInt(incomeCategoryId),
+                    amount: parseFloat(amount),
+                    transactionDate: date,
+                    description: description
+                };
+            },
+            didOpen: () => {
+                // Load income categories
+                $.ajax({
+                    url: '/Banka/AjaxGetIncomeCategories',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        let incomeDropdown = $('#incomeCategory');
+                        incomeDropdown.empty();
+                        incomeDropdown.append('<option value="">Gelir Kalemi Seçiniz</option>');
+                        data.data.forEach(function(item) {
+                            incomeDropdown.append(`<option value="${item.id}">${item.title}</option>`);
+                        });
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Gelir kalemleri yüklenemedi.', 'error');
+                    }
+                });
+                // Load bank selection dropdown
+                $.ajax({
+                    url: '/Banka/AjaxGetBanks',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        let bankDropdown = $('#bankSelection');
+                        bankDropdown.empty();
+                        bankDropdown.append('<option value="">Hangi Bankaya?</option>');
+                        data.data.forEach(function(item) {
+                            let selected = (item.id == bankId) ? 'selected' : '';
+                            bankDropdown.append(`<option value="${item.id}" ${selected}>${item.bankName} - ${item.accountHolder}</option>`);
+                        });
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Banka verileri yüklenemedi.', 'error');
+                    }
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Banka/AddIncomeMovement',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire('Başarılı!', response.message, 'success').then(() => { location.reload(); });
+                        } else {
+                            Swal.fire('Hata!', response.message, 'error');
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Gelir eklenirken hata oluştu.', 'error');
+                    }
+                });
+            }
+        });
+    }
+    function openExpenseModalForBank(bankId) {
+        Swal.fire({
+            title: 'Gider Ekle',
+            html:
+                '<select id="expenseCategory" class="form-control mb-3">' +
+                    '<option value="">Gider Kalemi Seçiniz</option>' +
+                '</select>' +
+                '<select id="bankSelection" class="form-control mb-3">' +
+                    '<option value="">Hangi Bankaya?</option>' +
+                '</select>' +
+                '<input id="expenseAmount" type="number" class="form-control mb-3" placeholder="İşlem Tutarı">' +
+                '<input id="expenseDate" type="date" class="form-control mb-3" value="' + new Date().toISOString().split("T")[0] + '">' +
+                '<textarea id="expenseDescription" class="form-control mb-3" placeholder="Açıklama"></textarea>',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Ekle',
+            preConfirm: () => {
+                let expenseCategoryId = $('#expenseCategory').val();
+                let selectedBankId = $('#bankSelection').val();
+                let amount = $('#expenseAmount').val();
+                let date = $('#expenseDate').val();
+                let description = $('#expenseDescription').val().trim();
+
+                if (!expenseCategoryId) {
+                    Swal.showValidationMessage('Lütfen gider kalemi seçiniz.');
+                    return false;
+                }
+                if (!selectedBankId) {
+                    Swal.showValidationMessage('Lütfen banka seçiniz.');
+                    return false;
+                }
+                if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+                    Swal.showValidationMessage('Lütfen geçerli bir tutar giriniz.');
+                    return false;
+                }
+                if (!date) {
+                    Swal.showValidationMessage('Lütfen işlem tarihi giriniz.');
+                    return false;
+                }
+                return {
+                    bankId: parseInt(selectedBankId),
+                    expenseCategoryId: parseInt(expenseCategoryId),
+                    amount: parseFloat(amount),
+                    transactionDate: date,
+                    description: description
+                };
+            },
+            didOpen: () => {
+                // Load expense categories
+                $.ajax({
+                    url: '/Banka/AjaxGetExpenseCategories',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        let expenseDropdown = $('#expenseCategory');
+                        expenseDropdown.empty();
+                        expenseDropdown.append('<option value="">Gider Kalemi Seçiniz</option>');
+                        data.data.forEach(function(item) {
+                            expenseDropdown.append(`<option value="${item.id}">${item.title}</option>`);
+                        });
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Gider kalemleri yüklenemedi.', 'error');
+                    }
+                });
+                // Load bank selection dropdown
+                $.ajax({
+                    url: '/Banka/AjaxGetBanks',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        let bankDropdown = $('#bankSelection');
+                        bankDropdown.empty();
+                        bankDropdown.append('<option value="">Hangi Bankaya?</option>');
+                        data.data.forEach(function(item) {
+                            let selected = (item.id == bankId) ? 'selected' : '';
+                            bankDropdown.append(`<option value="${item.id}" ${selected}>${item.bankName} - ${item.accountHolder}</option>`);
+                        });
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Banka verileri yüklenemedi.', 'error');
+                    }
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: '/Banka/AddExpenseMovement',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(result.value),
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire('Başarılı!', response.message, 'success').then(() => { location.reload(); });
+                        } else {
+                            Swal.fire('Hata!', response.message, 'error');
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Hata!', 'Gider eklenirken hata oluştu.', 'error');
+                    }
+                });
+            }
+        });
+    }
 
 </script>

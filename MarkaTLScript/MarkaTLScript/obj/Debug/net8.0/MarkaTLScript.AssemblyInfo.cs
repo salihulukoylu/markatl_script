@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarkaTLScript")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6341dc31f3adaa2e785c12de6258fee8e13a5917")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f8fe2f0d6f671949274fdf818c4fc5b46fd5317")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarkaTLScript")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarkaTLScript")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
