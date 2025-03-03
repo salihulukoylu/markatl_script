@@ -348,7 +348,7 @@ wwwroot\assets\libs\@simonwep\pickr\themes\classic.min.css
 wwwroot\assets\libs\@simonwep\pickr\themes\monolith.min.css
 wwwroot\assets\libs\@simonwep\pickr\themes\nano.min.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js
-wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js.gz
+D:\repos\markatl_script\MarkaTLScript\MarkaTLScript\wwwroot\assets\libs\@tarekraafat\autocomplete.js\autoComplete.min.js
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.01.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.02.css
 wwwroot\assets\libs\@tarekraafat\autocomplete.js\css\autoComplete.css

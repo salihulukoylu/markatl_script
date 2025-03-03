@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\repos\\markatl_script\\MarkaTLScript\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\kontor\\operatorayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\kontor\\operatorayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\odeme\\bankaayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\odeme\\bankaayarlari.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|solutionrelative:markatlscript\\views\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A92241C1-119C-4B4A-B67B-8C1C6DB1FBE4}|MarkaTLScript\\MarkaTLScript.csproj|d:\\repos\\markatl_script\\markatlscript\\markatlscript\\controllers\\bankacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,11 +58,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 341,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "KontorApileri.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Kontor\\KontorApileri.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Kontor\\KontorApileri.cshtml",
@@ -70,18 +70,17 @@
               "RelativeToolTip": "MarkaTLScript\\Views\\Kontor\\KontorApileri.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-03T04:57:36.427Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:57:36.427Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Index.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Index.cshtml",
               "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Index.cshtml",
               "RelativeToolTip": "MarkaTLScript\\Views\\Index.cshtml",
-              "ViewState": "AgIAABEAAAAAAAAAAIApwB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAIApwB4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-03T04:29:48.013Z",
               "EditorCaption": ""
@@ -96,18 +95,17 @@
               "RelativeToolTip": "MarkaTLScript\\Models\\Operator.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAABsAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T04:29:21.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:29:21.673Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "OperatorAyarlari.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Kontor\\OperatorAyarlari.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Kontor\\OperatorAyarlari.cshtml",
               "ToolTip": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Kontor\\OperatorAyarlari.cshtml",
               "RelativeToolTip": "MarkaTLScript\\Views\\Kontor\\OperatorAyarlari.cshtml",
-              "ViewState": "AgIAAD0AAAAAAAAAAIApwEwAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-03T04:29:14.234Z",
               "EditorCaption": ""
@@ -122,8 +120,7 @@
               "RelativeToolTip": "MarkaTLScript\\Controllers\\BankaController.cs",
               "ViewState": "AgIAAEIAAAAAAAAAAAAAAFAAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T04:25:05.316Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:25:05.316Z"
             },
             {
               "$type": "Document",
@@ -135,8 +132,7 @@
               "RelativeToolTip": "MarkaTLScript\\Models\\BankAccount.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAIA3wBcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T04:23:35.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:23:35.027Z"
             },
             {
               "$type": "Document",
@@ -148,8 +144,7 @@
               "RelativeToolTip": "MarkaTLScript\\scaffold.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-03-03T04:23:06.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:23:06.535Z"
             },
             {
               "$type": "Document",
@@ -161,12 +156,11 @@
               "RelativeToolTip": "MarkaTLScript\\Controllers\\ExpenseController.cs",
               "ViewState": "AgIAABIAAAAAAAAAAIAhwD0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T04:14:33.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:14:33.544Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BankaAyarlari.cshtml",
               "DocumentMoniker": "D:\\repos\\markatl_script\\MarkaTLScript\\MarkaTLScript\\Views\\Odeme\\BankaAyarlari.cshtml",
               "RelativeDocumentMoniker": "MarkaTLScript\\Views\\Odeme\\BankaAyarlari.cshtml",
@@ -174,8 +168,7 @@
               "RelativeToolTip": "MarkaTLScript\\Views\\Odeme\\BankaAyarlari.cshtml",
               "ViewState": "AgIAAJ0AAAAAAAAAAADwv68AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-03T04:12:49.813Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:12:49.813Z"
             },
             {
               "$type": "Document",
@@ -187,8 +180,7 @@
               "RelativeToolTip": "MarkaTLScript\\Controllers\\IncomeController.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAUwD0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T04:09:53.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:09:53.497Z"
             },
             {
               "$type": "Document",
@@ -200,8 +192,7 @@
               "RelativeToolTip": "MarkaTLScript\\Views\\Muhasebe\\GiderKayitlari.cshtml",
               "ViewState": "AgIAACsAAAAAAAAAAAAQwCgAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-03T04:07:10.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:07:10.193Z"
             },
             {
               "$type": "Document",
@@ -213,8 +204,7 @@
               "RelativeToolTip": "MarkaTLScript\\Views\\Muhasebe\\GelirKayitlari.cshtml",
               "ViewState": "AgIAAB4AAAAAAAAAAAAdwCgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-03T04:07:09.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-03T04:07:09.768Z"
             }
           ]
         }
